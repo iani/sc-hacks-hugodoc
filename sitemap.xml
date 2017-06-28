@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic-principles/principles/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic-principles/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/overviews/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/synths/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/gui/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/use-scenarios/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tests/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/</loc>
+    <lastmod>2017-04-24T18:36:24+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/_header/</loc>
+    <lastmod>2017-04-24T18:36:24+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/gui/buildingguis/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/class/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/classes/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/coding/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/coding/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/gui/creatingguis/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/data/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/design/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/design/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/env/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/envelopes/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/envgen/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/environment/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/event/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/eventpattern/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/eventstream/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/eventstreamplayer/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/gate/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/grains/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/granular/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/gui/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/gui/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tests/mermaid-test/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/synths/improvingeplay/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/language/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/learning/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/method/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/methods/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/overviews/minilanguageoverview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/eventstream/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/nevent/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/notes/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/notification/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/notification/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/overviews/operatordesign/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/operators/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/operators/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/pattern/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/use-scenarios/patternsynthplay/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/eventeplay/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/synths/function-eplay/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/playingeventsaspatterns/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/playinggrains/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/playingwithdata/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/registry/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/registry/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic-principles/principles/storespecsandsynthdefsinlibrary/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/synth/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/synthesis/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/techniques/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tests/slide-test/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/todo/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/trigger/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/triggeringenvgen/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/triggeringmethods/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/categories/use/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/use/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/tags/window/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
