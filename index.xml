@@ -178,7 +178,7 @@ Different ways of playing rows Playing each data row as one Synth Playing each d
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/registry/</guid>
-      <description>This class helps to store objects and to retrieve them using a key. This is similar to the way that with classes such as Pdef, Ndef, OSCdef work, but Registry can be used to add the same feature to any class, without subclassing it. To create this behavior instead, add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc. This also allows easier customization of how the object is created if not found.</description>
+      <description>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found.</description>
     </item>
     
     <item>

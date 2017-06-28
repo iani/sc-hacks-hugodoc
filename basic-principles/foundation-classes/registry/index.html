@@ -615,7 +615,7 @@ parent
 
 
 
-<p>This class helps to store objects and to retrieve them using a key.  This is similar to the way that with classes such as <code>Pdef</code>, <code>Ndef</code>, <code>OSCdef</code> work, but <code>Registry</code> can be used to add the same feature to any class, without subclassing it.  To create this behavior instead, add a method to <code>Symbol</code> for accessing the kind of object needed.  For example: <code>\aSymbol.oscFunc</code>. This also allows easier customization of how the object is created if not found.</p>
+<p>This class uses the <code>Library</code> class to store and  retrieve objects using any array of objects as key.  This extends the way that <code>Pdef</code>, <code>Ndef</code>, <code>OSCdef</code> work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing.  To create this behavior one can then add a method to <code>Symbol</code> for accessing the kind of object needed.  For example: <code>\aSymbol.oscFunc</code> accesses <code>OSCFunc</code> instances. This also allows easier customization of how the object is created if not found.</p>
 
 <h1 id="how-it-works">How it works</h1>
 
