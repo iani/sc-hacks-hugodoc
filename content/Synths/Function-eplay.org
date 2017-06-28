@@ -9,6 +9,7 @@
 #+HTML: <!-- more -->
 
 * Method code
+
 #+BEGIN_SRC javascript
 + Function {
 	eplay { | envir = \envir |
