@@ -1,0 +1,9 @@
+#+TITLE: Playing Grains
+#+CATEGORIES: use
+#+TAGS: granular synthesis
+
+Here are some examples for playing grains of sound from a buffer with 
+
+#+HTML: <!-- more -->
+
+To be provided ...

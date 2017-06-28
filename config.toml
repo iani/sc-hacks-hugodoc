@@ -1,0 +1,20 @@
+baseURL = "https://iani.github.io/sc-hacks-hugodoc/"
+languageCode = "en-us"
+title = "sc-hacks documentation"
+theme = "docdock"
+contentDir = "content"
+layoutDir = "layouts"
+publishDir = "public"
+buildDrafts = false
+canonifyURLs = true
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[params]
+  description = "Documentation for a SuperCollider Library"
+  author = "Ioannis Zannos"
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]

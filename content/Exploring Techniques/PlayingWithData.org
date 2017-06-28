@@ -1,0 +1,16 @@
+#+TITLE: Playing With Data
+#+CATEGORIES: design
+#+TAGS: data, design
+
+This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer. 
+
+#+HTML: <!-- more -->
+
+* Data dimensions and play method
+
+The data is a 2 dimensional array.  It is played as a =Pseq= along the first dimension.  This results in a stream of rows.  Each subsequent element returned by the stream is a row of data.
+
+* Different ways of playing rows
+** Playing each data row as one Synth
+
+** Playing each d

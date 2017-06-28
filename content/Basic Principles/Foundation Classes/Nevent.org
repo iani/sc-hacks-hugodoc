@@ -1,0 +1,7 @@
+#+TITLE: Nevent: Environment that notifes variable updates
+#+CATEGORIES: classes
+#+TAGS: notification
+
+=Nevent= is an =EnvironmentRedirect= that notifies the changes of value of its variables. 
+
+
