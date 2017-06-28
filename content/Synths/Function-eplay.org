@@ -9,7 +9,7 @@
 #+HTML: <!-- more -->
 
 * Method code
-#+BEGIN_SRC sclang
+#+BEGIN_SRC javascript
 + Function {
 	eplay { | envir = \envir |
 		var synth;
@@ -42,7 +42,7 @@
 
 * Example
 
-#+BEGIN_SRC sclang
+#+BEGIN_SRC javascript
 \window.vlayout (
 	HLayout (
 		StaticText ().string_ (\freq),
