@@ -38,9 +38,7 @@ These are operators that are written after an event, and thus take an event as r
 
 ** Operators on Symbols
 
-These are operators that are written after a symbol, and thus take a symbol as receiver.
-
-They are primarily used to link synths (with buses, and in right synth order).
+These are operators that are written after a symbol, and thus take a symbol as receiver. They are primarily used to link synths by setting the =out= and =in= environment variables in Nenvir instances to a common bus.
 
 - =&>= :: set the output bus of the receiver to the input bus of the argument (only the output bus of the receiver changes)
 - =<&= :: set the input bus of the argument to the output bus of the receiver (only the input bus of the argument changes)

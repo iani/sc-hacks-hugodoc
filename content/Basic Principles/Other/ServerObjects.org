@@ -1,0 +1,27 @@
++++
+title = "Server Objects"
+# pre ="<i class='fa fa-github'></i> "
+weight = 1
++++
+
+* Server
+Each =Nevent= Environment has  only one Server instance.  Synths and Patterns play in that instance.
+
+Open issue: Where to store the server of an Environment.  Possibilities: 
+
+1. As variable =~server=
+2. In Library using Registry, using =[environment \server]= as key
+3. Do not store, use =Server.default=
+
+* Allocating Server Objects at Reboot
+
+* Target
+
+* Maintaining Target Group Order
+
+* Busses
+
+** Bus Allocation
+
+** Bus Index Parameter Updates
+
