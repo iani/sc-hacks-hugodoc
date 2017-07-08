@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>Server Objects</title>
+      <link>https://iani.github.io/sc-hacks-hugodoc/basic-principles/other/serverobjects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://iani.github.io/sc-hacks-hugodoc/basic-principles/other/serverobjects/</guid>
+      <description>Server Each Nevent Environment has only one Server instance. Synths and Patterns play in that instance.
+Open issue: Where to store the server of an Environment. Possibilities:
+ As variable ~server In Library using Registry, using [environment \server] as key Do not store, use Server.default  Allocating Server Objects at Reboot Target Maintaining Target Group Order Busses Bus Allocation Bus Index Parameter Updates </description>
+    </item>
+    
+    <item>
       <title>header</title>
       <link>https://iani.github.io/sc-hacks-hugodoc/_header/</link>
       <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>

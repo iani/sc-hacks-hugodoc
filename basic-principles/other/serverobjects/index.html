@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>GUI :: sc-hacks documentation</title>
+    <title>Server Objects :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/gui/">
+  <body class="" data-url="/basic-principles/other/serverobjects/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -73,7 +73,7 @@
 
 
 <li data-nav-id="/basic-principles/" class="dd-item 
-
+parent
 
 
 ">
@@ -81,7 +81,7 @@
     <span>Principles</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -188,7 +188,7 @@
 
 
 <li data-nav-id="/basic-principles/other/" class="dd-item 
-
+parent
 
 
 ">
@@ -196,7 +196,7 @@
     <span>Implementation Issues</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -205,7 +205,7 @@
         
          
           <li data-nav-id="/basic-principles/other/serverobjects/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/basic-principles/other/serverobjects/">
             <span>Server Objects</span> 
@@ -380,15 +380,15 @@
 
 
 <li data-nav-id="/gui/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/gui/">
     <span>GUI</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -611,7 +611,17 @@ active
 
 
 
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>HOME</a> > GUI
+
+
+
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>HOME</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/basic-principles/'>Principles</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/basic-principles/other/'>Implementation Issues</a> > Server Objects
+
+ 
+
+ 
 
  
 
@@ -629,98 +639,40 @@ active
         
         <div id="body-inner">
           
-            <h1>GUI</h1>
+            <h1>Server Objects</h1>
           
 
 
 
 
+<h1 id="server">Server</h1>
+
+<p>Each <code>Nevent</code> Environment has  only one Server instance.  Synths and Patterns play in that instance.</p>
+
+<p>Open issue: Where to store the server of an Environment.  Possibilities:</p>
+
+<ol>
+<li>As variable <code>~server</code></li>
+<li>In Library using Registry, using <code>[environment \server]</code> as key</li>
+<li>Do not store, use <code>Server.default</code></li>
+</ol>
+
+<h1 id="allocating-server-objects-at-reboot">Allocating Server Objects at Reboot</h1>
+
+<h1 id="target">Target</h1>
+
+<h1 id="maintaining-target-group-order">Maintaining Target Group Order</h1>
+
+<h1 id="busses">Busses</h1>
+
+<h2 id="bus-allocation">Bus Allocation</h2>
+
+<h2 id="bus-index-parameter-updates">Bus Index Parameter Updates</h2>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post GUI">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/gui/buildingguis/">Building GUIs</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This notebook shows how to build GUIs starting from scratch, with minimal code and in small steps.
-Just a window //: 1 Just a window Window (&quot;window name&quot;).front;  Add a slider and resize. Use VLayout for automatic resizing.
-Window (&quot;window name&quot;) .view.layout_ ( VLayout ( Slider () ) ).front; //: Make the slider horizontal. Window (&quot;window name&quot;) .view.layout_ ( VLayout ( Slider () .orientation_ (\horizontal) ) ).front;  Add more sliders Use a function to avoid repeating spec code! <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/gui/buildingguis/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-          
-            
-                <a class="label label-default" href="https://iani.github.io/sc-hacks-hugodoc/tags/learning/">learning,</a>
-            
-                <a class="label label-default" href="https://iani.github.io/sc-hacks-hugodoc/tags/gui/">gui</a>
-            
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post GUI">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/gui/creatingguis/">Creating GUIs</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This library provides utilities for creating GUI elements and connecting them to both patterns and synths. Here are some examples.
-Windows Sliders Buttons  <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/gui/creatingguis/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-          
-            
-                <a class="label label-default" href="https://iani.github.io/sc-hacks-hugodoc/tags/gui/">gui,</a>
-            
-                <a class="label label-default" href="https://iani.github.io/sc-hacks-hugodoc/tags/window/">window</a>
-            
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -749,156 +701,17 @@ Windows Sliders Buttons  <a class="read-more" href="https://iani.github.io/sc-ha
             
                 
                     
+                    
+                
+                
+                
+                    
+            
+            
+                
+                    
                         
                         
-                    
-                
-                
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -980,8 +793,149 @@ Windows Sliders Buttons  <a class="read-more" href="https://iani.github.io/sc-ha
             
                 
                     
+                    
+                
+                
+                
+            
+        
+                    
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
                         
                         
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1121,10 +1075,10 @@ Windows Sliders Buttons  <a class="read-more" href="https://iani.github.io/sc-ha
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/patterns/playingeventsaspatterns/" title="Playing Events as Patterns"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/basic-principles/other/" title="Implementation Issues"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/gui/buildingguis/" title="Building GUIs" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/overviews/" title="Overviews" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1151,3 +1105,4 @@ Windows Sliders Buttons  <a class="read-more" href="https://iani.github.io/sc-ha
 
   </body>
 </html>
+
