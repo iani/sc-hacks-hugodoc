@@ -4,4 +4,11 @@
 
 =Nevent= is an =EnvironmentRedirect= that notifies the changes of value of its variables. 
 
+It is used to provide an environment for playing Synths and Patterns. The environment variables contained in it define parameters for creating Synths and Patterns.  Such parameters are:
+- the =target= where a synth is created (usually a =Group=).
+- the =out= or =in= parameters which designate the buses for audio or control signal input and output.
+- Any other synth parameters such as =amp=, =freq=, =gate= etc.
+
+All instances of =Nevent= are created at once during StartUp, and are stored in an Array in classvar =all=.  This ensures that the order of Nevent instances is fixed.
+
 
