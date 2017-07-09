@@ -653,6 +653,15 @@ parent
 
 <p><code>Nevent</code> is an <code>EnvironmentRedirect</code> that notifies the changes of value of its variables.</p>
 
+<ul>
+It is used to provide an environment for playing Synths and Patterns. The environment variables contained in it define parameters for creating Synths and Patterns.  Such parameters are:
+<li>the <code>target</code> where a synth is created (usually a <code>Group</code>).</li>
+<li>the <code>out</code> or <code>in</code> parameters which designate the buses for audio or control signal input and output.</li>
+<li>Any other synth parameters such as <code>amp</code>, <code>freq</code>, <code>gate</code> etc.</li>
+</ul>
+
+<p>All instances of <code>Nevent</code> are created at once during StartUp, and are stored in an Array in classvar <code>all</code>.  This ensures that the order of Nevent instances is fixed.</p>
+
 
 <footer class=" footline" >
 	
