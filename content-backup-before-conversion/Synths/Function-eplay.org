@@ -1,0 +1,64 @@
+#+TITLE: Play a function in the environment
+#+CATEGORIES: methods
+#+TAGS: synth, method, environment
+
+1. Provide arguments for playing a function from values found in an environment.
+2. connect all control names in the function's arguments to an environment for auto-update
+3. Free all notifications from the synth when it stops playing.
+
+#+HTML: <!-- more -->
+
+* Method code
+
+#+BEGIN_SRC javascript
++ Function {
+	eplay { | envir = \envir |
+		var synth;
+		envir = envir.asEnvironment;
+		envir use: {
+			var argNames, args;
+			argNames = this.def.argNames;
+			args = argNames.collect ({ | name |
+				[name, currentEnvironment [name]]
+			}).select ({ | pair |
+				pair [1].notNil;
+			}).flat;
+			//  arg target, outbus = 0, fadeTime = 0.02, addAction=\addToHead, args;
+			synth = this.play  (
+				~target.asTarget, ~outbus ? 0, ~fadeTime ? 0.02,
+				~addAction ? \addToHead, args
+			);
+			argNames do: { | param |
+				synth.addNotifier (envir, param, { | val |
+					synth.set (param, val);
+				});
+			};
+		};
+		// This is done by addNotifier anyway:
+		//		synth.onEnd (this, { synth.objectClosed });
+		^synth;
+	}
+}
+#+END_SRC
+
+* Example
+
+#+BEGIN_SRC javascript
+\window.vlayout (
+	HLayout (
+		StaticText ().string_ (\freq),
+		Slider.horizontal.connectEnvir (\freq),
+		NumberBox ().connectEnvir (\freq)
+	)
+).front;
+//:
+{
+	loop {
+		~freq = 400 + 400.rand;
+	   1.wait;
+	}
+}.fork;
+//:
+{ | freq = 440 | SinOsc.ar (freq, 0, 0.1) }.eplay;
+//:
+#+END_SRC

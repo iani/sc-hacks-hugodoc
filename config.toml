@@ -1,4 +1,4 @@
-baseURL = "https://iani.github.io/sc-hacks-hugodoc/"
+baseURL = "/"
 languageCode = "en-us"
 title = "sc-hacks documentation"
 theme = "docdock"

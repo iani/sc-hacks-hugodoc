@@ -1,0 +1,152 @@
++++
+title = "fc master file"
+draft = true
+weight = 0
++++
+
+* Nevent: Environment that notifes variable updates :notification:
+:PROPERTIES:
+:filename: nevent
+:END:
+
+=Nevent= is an =EnvironmentRedirect= that notifies the changes of value of its variables. 
+
+It is used to provide an environment for playing Synths and Patterns. The environment variables contained in it define parameters for creating Synths and Patterns.  Such parameters are:
+- the =target= where a synth is created (usually a =Group=).
+- the =out= or =in= parameters which designate the buses for audio or control signal input and output.
+- Any other synth parameters such as =amp=, =freq=, =gate= etc.
+
+All instances of =Nevent= are created at once during StartUp, and are stored in an Array in classvar =all=.  This ensures that the order of Nevent instances is fixed.
+
+* Notification: Register a function callback to a message and a pair of objects :notification:
+:PROPERTIES:
+:filename: notification
+:END:
+
+=Notification= is an improved version of the [[http://doc.sccode.org/Classes/NotificationCenter.html][NotificationCenter class]].  This class enables objects to register a function which is called when another object changes according to some aspect.  The aspect is expressed by a symbol.  To trigger a notification action, one sends the message =changed= to an object together with a symbol expressing the aspect which changed.  The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol.  This allows detailed control of callback execution amongst objects of the system.  For example, one can tell a gui object to change its color to green when a synth starts, and to change its color to red when that synth stops.
+
+=Notification= adds the following enhancements: 
+- Ability to remove existing notification connections reliably.
+- Several methods for easily adding or modifying connections between objects.
+- Ability to remove all connections from an object with a single message, =objectClosed=, and also to execute additional actions when that object closes.  Closing here means that the object is freed and will no longer be used by the system.
+
+** Examples
+*** =onObjectClosed=
+
+=Registry= uses =onObjectClosed= to remove objects by sending them that message:
+
+#+BEGIN_SRC sclang
+   *new { | ... pathAndFunc |
+		var path, makeFunc, instance;
+		makeFunc = pathAndFunc.last;
+		path = pathAndFunc[0..pathAndFunc.size-2];
+		instance = Library.global.atPath(path);
+		if (instance.isNil) {
+			instance = makeFunc.value;
+			Library.global.putAtPath(path, instance);
+			instance.onObjectClosed(this, {
+				this.remove(*path)
+			});
+		};
+		^instance;
+  }
+#+END_SRC
+
+This is in turn used by =oscFunc= and =rout= methods for removing =OSCFunc= and =Routine= objects in order to replace them with new instances. 
+*** =addNotifierOneShot=
+
+The =addNotifierOneShot= method executes the registered Function just once. This is useful when it is clear that only one call is required. For example, the =onEnd= and =onStart= methods for =Node= make use of the =addNotifierOneShot= method:
+
+#+BEGIN_SRC sclang
++ Node {
+	onStart { | listener, action |
+		NodeWatcher.register(this);
+		listener.addNotifierOneShot(this, \n_go, action);
+	}
+
+	onEnd { | listener, action |
+		NodeWatcher.register(this);
+		//		this.isPlaying = true; // dangerous
+		listener.addNotifierOneShot(this, \n_end, action);
+	}
+}
+#+END_SRC
+
+Similar extensions can be built for whatever object needs to monitor the closing or end of an object such as closing of a Window or stopping of a Pattern.
+* Registry: Hierarchical Namespaces :registry:
+:PROPERTIES:
+:filename: registry
+:END:
+
+This class uses the =Library= class to store and  retrieve objects using any array of objects as key.  This extends the way that =Pdef=, =Ndef=, =OSCdef= work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing.  To create this behavior one can then add a method to =Symbol= for accessing the kind of object needed.  For example: =\aSymbol.oscFunc= accesses =OSCFunc= instances. This also allows easier customization of how the object is created if not found. 
+
+#+HTML: <!-- more -->
+
+** How it works
+
+Store an object in Library under an array of objects (called a /path/).  When accessing the path, create the object if not already stored, else return the previously stored object.
+
+** Who uses it
+
+- =SynthPlayer= registers its instances in the current environment under their names.
+- 
+- =Function:oscFunc= and =Symbol:removeOsc= registers =OSCFuncs= under their path names in order to remove existing OSCFunc instances when creating a new one under the same path. 
+
+** Example
+
+This is the code that makes it possible to create or modify an OSCFunc bound to a symbol.  It defines the methods =Function:oscFunc= and =Symbol:removeOsc=.
+
+#+BEGIN_SRC sclang
++ Function {
+	oscFunc { | path |
+		path.removeOsc;
+		^Registry ('oscFuncs', path, { OSCFunc (this, path) });
+	}
+}
+
++ Symbol {
+	removeOsc {
+		Registry.doIfFound ('oscFuncs', this, { | found |
+			found.objectClosed;
+			found.free;
+		});	
+	}
+}
+#+END_SRC
+
+* Server Objects
+:PROPERTIES:
+:filename: server_objects
+:END:
+
+** Server
+Each =Nevent= Environment has  only one Server instance.  Synths and Patterns play in that instance.
+
+Open issue: Where to store the server of an Environment.  Possibilities: 
+
+1. As variable =~server=
+2. In Library using Registry, using =[environment \server]= as key
+3. In prototype event for Nevent. (Needs to be programmed yet).
+4. Do not store, use =Server.default=
+
+Currently option 4 is used, to concentrate on finishing the other features of the library.  Adding multiple servers will probably require a =NeventGroup= class whose instances create and manage groups of Nevents playing on the same server. =NeventGroup= will store the selected Server instance in the parent event of each =Nevent= instance which it creates.
+
+** Server objects managed by Nevent
+
+These are: 
+
+- The Group which is used to create all Synths in the event.
+- Busses connecting inputs or outputs of Synths in the event to those of other events.
+- Buffers used for playing by Synths
+
+** Allocating Server Objects at Reboot
+
+** Target
+
+** Maintaining Target Group Order
+
+** Busses
+
+*** Bus Allocation
+
+*** Bus Index Parameter Updates

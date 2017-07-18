@@ -1,0 +1,16 @@
++++
+title = "Triggering Methods"
+weight = 4
++++
+
+This section illustrates several different ways to trigger grains, envelopes or other gate-triggered UGens
+
+#+HTML: <!-- more -->
+
+* Triggering from lang with set
+
+* Triggering internally UGens
+
+** Impulse, Dust etc.
+
+** Demand UGens

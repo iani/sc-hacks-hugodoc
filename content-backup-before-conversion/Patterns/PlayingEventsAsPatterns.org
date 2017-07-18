@@ -1,0 +1,71 @@
+#+TITLE: Playing Events as Patterns
+#+CATEGORIES: coding
+#+TAGS: Event, Pattern
+
+/sc-hacks/ provides two ways to play Events as patterns: 
+1. =\name pplay: (event ...)= Play event as EventPattern, using default =play= key settings, i.e. playing notes unless something else is specified.
+2. =(event ...) eplay: \name= Play event as EventPattern using a custom partial event type =\envEvent=. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of =\degree=, =\ctranspose= and related keys, to =currentEnvironment=. These changes are broadcast to the system using the =changed= mechanism and can be used to drive both GUI and synths.
+
+#+HTML: <!-- more -->
+
+Both =pplay= and =eplay= use =EventPattern=, =EventStream= and =EventStreamPlayer=.  This means, it is easy to modify the event and thus change the behaviour of the player, while it is playing.  
+
+* Symbol pplay
+
+Here the pattern is modified with =addKey=, =addEvent= and =setEvent= while playing:
+
+#+BEGIN_SRC javascript
+\p.pplay;
+//:
+\p.pplay ((freq: Pbrown (10, 200, 10, inf) * 10));
+//:
+\p.pplay ((degree: Pbrown (1, 20, 3, inf)));
+//:
+\p.addKey (\dur, 0.1);
+//:
+\p addEvent: (ctranspose: Pstutter (20, Pbrown (-6, 6, 1, inf)), legato: Pseq ([0.2, 0.1, 0.2, 4], inf));
+//:
+\p setEvent: (freq: Pwhite (300, 3000, inf), dur: Pseq ([0.1, 0.3], inf), legato: 0.1);
+#+END_SRC
+
+* Event eplay
+
+#+BEGIN_SRC javascript
+  (freq: Pwhite (400, 20000, inf).sqrt, dur: 0.1).eplay;
+  \window.vlayout (CSlider (\freq)).front;
+  //:
+  (freq: Pwhite (400, 2000, inf), dur: 0.1).eplay;
+  //:
+  \test splay: { SinOsc.ar (\freq.kr (400), 0, 0.1) };
+  //:
+  (degree: Pbrown (0, 20, 2, inf), dur: 0.1).eplay;
+  //: Play different functions in parallel, with crossfade: 
+  ~fadeTime = 2;
+  {
+	  var players;
+	  players = Pseq ([
+		  { LFPulse.ar (\freq.kr (400) / [2, 3], 0, 0.5, 0.1) },
+		  /*
+		    { Blip.ar (\freq.kr (400 * [1, 1.2]),
+		    LFNoise0.kr (5).range (5, 250),
+		    0.3)
+		    },
+		  ,*/
+		  {
+			  LPF.ar (
+				  Ringz.ar (PinkNoise.ar (0.1), \freq.kr (400) * [1, 1.5], 0.1),
+				  LFNoise2.kr (1).range (400, 1000)
+			  )
+		  }
+	  ], inf).asStream;
+	  loop {
+		  \test splay: players.next;
+		  2.5.wait;
+	  }
+  }.fork;
+
+  //: NOTE: other keys are overwritten in the source event of the other
+#+END_SRC
+
+
+

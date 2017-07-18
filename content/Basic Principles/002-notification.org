@@ -1,0 +1,55 @@
++++
+title = "Notification: Register a function callback to a message and a pair of objects"
+weight = 2
++++
+
+=Notification= is an improved version of the [[http://doc.sccode.org/Classes/NotificationCenter.html][NotificationCenter class]].  This class enables objects to register a function which is called when another object changes according to some aspect.  The aspect is expressed by a symbol.  To trigger a notification action, one sends the message =changed= to an object together with a symbol expressing the aspect which changed.  The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol.  This allows detailed control of callback execution amongst objects of the system.  For example, one can tell a gui object to change its color to green when a synth starts, and to change its color to red when that synth stops.
+
+=Notification= adds the following enhancements: 
+- Ability to remove existing notification connections reliably.
+- Several methods for easily adding or modifying connections between objects.
+- Ability to remove all connections from an object with a single message, =objectClosed=, and also to execute additional actions when that object closes.  Closing here means that the object is freed and will no longer be used by the system.
+
+* Examples
+** =onObjectClosed=
+
+=Registry= uses =onObjectClosed= to remove objects by sending them that message:
+
+#+BEGIN_SRC sclang
+   *new { | ... pathAndFunc |
+		var path, makeFunc, instance;
+		makeFunc = pathAndFunc.last;
+		path = pathAndFunc[0..pathAndFunc.size-2];
+		instance = Library.global.atPath(path);
+		if (instance.isNil) {
+			instance = makeFunc.value;
+			Library.global.putAtPath(path, instance);
+			instance.onObjectClosed(this, {
+				this.remove(*path)
+			});
+		};
+		^instance;
+  }
+#+END_SRC
+
+This is in turn used by =oscFunc= and =rout= methods for removing =OSCFunc= and =Routine= objects in order to replace them with new instances. 
+** =addNotifierOneShot=
+
+The =addNotifierOneShot= method executes the registered Function just once. This is useful when it is clear that only one call is required. For example, the =onEnd= and =onStart= methods for =Node= make use of the =addNotifierOneShot= method:
+
+#+BEGIN_SRC sclang
++ Node {
+	onStart { | listener, action |
+		NodeWatcher.register(this);
+		listener.addNotifierOneShot(this, \n_go, action);
+	}
+
+	onEnd { | listener, action |
+		NodeWatcher.register(this);
+		//		this.isPlaying = true; // dangerous
+		listener.addNotifierOneShot(this, \n_end, action);
+	}
+}
+#+END_SRC
+
+Similar extensions can be built for whatever object needs to monitor the closing or end of an object such as closing of a Window or stopping of a Pattern.

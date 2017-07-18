@@ -11,19 +11,19 @@ history= true
 center= true
 +++
 
-# This is a slide test
+* This is a slide test
 
 This is content
 
 ---
 
-# This is the second section
+* This is the second section
 
 This is the content of the second section.
 
 ___
 
-# This is the third section
+* This is the third section
 
 The slide should appear below somehow.
 
@@ -31,24 +31,10 @@ The slide should appear below somehow.
 
 Embedding mermaid does not work
 
-``` javascript
+#+BEGIN_SRC javascript
 Javascript works as code.
-```
-
-``quote`` and un-quote. _italics_ __bold__
+#+END_SRC
 
 
-___
 
-Embedding mermaid does not work
-
-
-___
-
-Embedding mermaid does not work
-
-
-___
-
-Embedding mermaid does not work
-
+=quote= and un-quote. _italics_ *bold*

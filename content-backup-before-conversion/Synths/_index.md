@@ -1,5 +1,5 @@
 +++
-title = "Foundation Classes"
+title = "Synths"
 # pre ="<i class='fa fa-github'></i> "
-weight = 2
+weight = 3
 +++
