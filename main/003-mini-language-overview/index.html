@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Patterns :: sc-hacks documentation</title>
+    <title>Mini-Language Overview :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     <link href="/css/nucleus.css" rel="stylesheet">
     <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/patterns/">
+  <body class="" data-url="/main/003-mini-language-overview/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -73,7 +73,7 @@
 
 
 <li data-nav-id="/main/" class="dd-item 
-
+parent
 
 
 ">
@@ -81,7 +81,7 @@
     <span>Operators and Language Design</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -101,7 +101,7 @@
         
          
           <li data-nav-id="/main/003-mini-language-overview/" class="dd-item
-         
+         active
           ">
             <a href="/main/003-mini-language-overview/">
             <span>Mini-Language Overview</span> 
@@ -142,15 +142,15 @@
 
 
 <li data-nav-id="/patterns/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="/patterns/">
     <span>Patterns</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -503,7 +503,12 @@ active
 
 
 
- <a href='/'>Main</a> > Patterns
+
+
+
+ <a href='/'>Main</a> > <a href='/main/'>Operators and Language Design</a> > Mini-Language Overview
+
+ 
 
  
 
@@ -521,128 +526,109 @@ active
         
         <div id="body-inner">
           
-            <h1>Patterns</h1>
+            <h1>Mini-Language Overview</h1>
           
 
 
 
 
+<p>The classes, methods and operators provided by <em>sc-hacks</em> extend SuperCollider to simplify the coding of GUI and of sound / musical structure / interaction.  They are designed in the sense of a very small language.  Here is a summary.</p>
+
+<h1 id="items-connected-to-currentenvironment-gui-synths-patterns-routines">Items connected to currentEnvironment: GUI, Synths, Patterns, Routines</h1>
+
+<h1 id="operator-and-message-overview">Operator and message overview</h1>
+
+<p><strong>This is a draft: Implementation of the following operators has just started.</strong> <em>The purpose of the overview is to guide coding by keeping the different versions discrete and consistent.</em></p>
+
+<h2 id="operators-on-functions">Operators on Functions</h2>
+
+<p>These are operators that are written after a function, and thus take a function as receiver.  They serve two main uses of functions in musical processes:</p>
+
+<ol>
+<li>Play a synth (<code>Function:play</code> : operator <code>+&gt;</code>)</li>
+<li>Play a routine (<code>Function:fork</code> : operator <code>*&gt;</code>)</li>
+</ol>
+
+<p>+> play as synth</p>
+
+<p>*> play as routine (fork)</p>
+
+<h2 id="operators-on-events">Operators on Events</h2>
+
+<p>These are operators that are written after an event, and thus take an event as receiver.  They serve to play the event as EventPattern inside currentEnvironment, setting the environments keys (but not producing any sound by itself).  Furthermore, they serve to modify the event of such a playing EventPattern.</p>
+
+<p>@> play</p>
+
+<p>@>+ addEvent</p>
+
+<p>@>! setEvent</p>
+
+<p>@>@ addKey</p>
+
+<h2 id="operators-on-symbols">Operators on Symbols</h2>
+
+<p>These are operators that are written after a symbol, and thus take a symbol as receiver. They are primarily used to link synths by setting the <code>out</code> and <code>in</code> environment variables in Nenvir instances to a common bus.</p>
+
+<dl>
+<dt><code>&amp;&gt;</code></dt>
+<dd>set the output bus of the receiver to the input bus of the argument (only the output bus of the receiver changes)</dd>
+<dt><code>&lt;&amp;</code></dt>
+<dd>set the input bus of the argument to the output bus of the receiver (only the input bus of the argument changes)</dd>
+</dl>
+
+<pre><code class="language-javascript">
+receiver &amp;&gt;! argument
+</code></pre>
+
+<dl>
+<dt><code>&amp;&gt;!</code></dt>
+<dd>set the output bus of the receiver to the input bus of the argument, on a new private bus (both receiver and argument change)</dd>
+</dl>
+
+<pre><code class="language-javascript">
+receiver &amp;/&gt; argument
+</code></pre>
+
+<dl>
+<dt><code>&amp;/&gt;</code></dt>
+<dd>Copy the output signal of the receiver from its bus onto the input bus of the argument, using a signal copy synth.</dd>
+</dl>
+
+<pre><code class="language-javascript">
+receiver &lt;/&gt; argument
+</code></pre>
+
+<dl>
+<dt><code>&lt;/&gt;</code></dt>
+<dd>Copy the output signal of the receiver onto a new private bus, and the signal from that private bus onto the input bus of the argument, using 2 signal copy synths.</dd>
+</dl>
+
+<h2 id="messages-to-symbols">Messages to symbols</h2>
+
+<p>splay</p>
+
+<p>eplay</p>
+
+<p>rplay</p>
+
+<h2 id="operators-on-strings">Operators on strings (!?)</h2>
+
+<p>string +> symbol : play synthdef named by string on the symbol as SynthPlayer ?</p>
+
+<h1 id="playing-synths">Playing Synths</h1>
+
+<h1 id="playing-routines">Playing Routines</h1>
+
+<h1 id="playing-patterns-with-default-note-events">Playing patterns with default note events</h1>
+
+<h1 id="playing-patterns-in-currentenvironment">Playing patterns in currentEnvironment</h1>
+
+<h1 id="creating-guis">Creating GUIs</h1>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post patterns">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/007-playing-events-as-patterns/">Playing Events as Patterns</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>/sc-hacks/ *sc-hacks* /sh-hacks/ provides two ways to play Events as patterns: \name pplay: (event ...) Play event as EventPattern, using default play key settings, i.e. playing notes unless something else is specified. (event ...) eplay: \name Play event as EventPattern using a custom partial event type \envEvent. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of \degree, \ctranspose and related keys, to currentEnvironment. <a class="read-more" href="/patterns/007-playing-events-as-patterns/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post patterns">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/008-events-as-patterns/">Playing Events as Patterns</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>sc-hacks provides two ways to play Events as patterns: \name pplay: (event ...) Play event as EventPattern, using default play key settings, i.e. playing notes unless something else is specified. (event ...) eplay: \name Play event as EventPattern using a custom partial event type \envEvent. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of \degree, \ctranspose and related keys, to currentEnvironment. <a class="read-more" href="/patterns/008-events-as-patterns/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post patterns">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/009-event-stream/">Modify Patterns while playing</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>An EventStream makes it easy to modify patterns while playing them.
-How it works An EventPattern creates EventStreams which are played by EventStreamPlayer. EventStream stores an event whose values are streams and uses this to produce a new event which is played by EventStreamPlayer. It is thus possible to modify the event stored in the EventStream while the EventStreamPlayer is playing it. This makes it easy to modify a playing pattern (which is difficult when using Pbind). <a class="read-more" href="/patterns/009-event-stream/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post patterns">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/010-event-eplay/">Patterns updating current environment</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>anEnvironment.eplay(envir)
-Play an event as EventPattern, updating the values in envir from each event. Use custom event type: envEvent. This only updates the values in the environment. The sound must be generated by Function:eplay. See examples below.
-Play the receiver Event in the environment given in argument envir using a custom event type to just set the values of corresponding variables at each event. For example, playing () set ~freq to 60. <a class="read-more" href="/patterns/010-event-eplay/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -671,6 +657,44 @@ Play the receiver Event in the environment given in argument envir using a custo
             
                 
                     
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
                         
                         
                     
@@ -691,7 +715,8 @@ Play the receiver Event in the environment given in argument envir using a custo
             
         
                     
-                        
+                
+                    
             
             
                 
@@ -706,44 +731,6 @@ Play the receiver Event in the environment given in argument envir using a custo
             
             
                 
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -974,10 +961,10 @@ Play the receiver Event in the environment given in argument envir using a custo
 
 
         
-            <a class="nav nav-prev" href="/main/005-function-eplay/" title="Play a function in the environment"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/main/002-operator-overview/" title="Operator Overview"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/patterns/007-playing-events-as-patterns/" title="Playing Events as Patterns" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/main/004-improving_eplay/" title="Improving Function:eplay" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1004,3 +991,4 @@ Play the receiver Event in the environment given in argument envir using a custo
 
   </body>
 </html>
+

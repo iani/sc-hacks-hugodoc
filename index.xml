@@ -1,123 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>HOME on sc-hacks documentation</title>
-    <link>https://iani.github.io/sc-hacks-hugodoc/</link>
-    <description>Recent content in HOME on sc-hacks documentation</description>
+    <title>Main on sc-hacks documentation</title>
+    <link>/</link>
+    <description>Recent content in Main on sc-hacks documentation</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 24 Apr 2017 18:36:24 +0200</lastBuildDate>
     
-	<atom:link href="https://iani.github.io/sc-hacks-hugodoc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Server Objects</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/basic-principles/other/serverobjects/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/basic-principles/other/serverobjects/</guid>
-      <description>Server Each Nevent Environment has only one Server instance. Synths and Patterns play in that instance.
-Open issue: Where to store the server of an Environment. Possibilities:
- As variable ~server In Library using Registry, using [environment \server] as key In prototype event for Nevent. (Needs to be programmed yet). Do not store, use Server.default  Allocating Server Objects at Reboot Target Maintaining Target Group Order Busses Bus Allocation Bus Index Parameter Updates </description>
-    </item>
-    
-    <item>
-      <title>header</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/_header/</link>
-      <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/_header/</guid>
-      <description>sc-hacks Documentation</description>
-    </item>
-    
-    <item>
-      <title>Building GUIs</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/gui/buildingguis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/gui/buildingguis/</guid>
-      <description>This notebook shows how to build GUIs starting from scratch, with minimal code and in small steps.
-Just a window //: 1 Just a window Window (&amp;quot;window name&amp;quot;).front;  Add a slider and resize. Use VLayout for automatic resizing.
-Window (&amp;quot;window name&amp;quot;) .view.layout_ ( VLayout ( Slider () ) ).front; //: Make the slider horizontal. Window (&amp;quot;window name&amp;quot;) .view.layout_ ( VLayout ( Slider () .orientation_ (\horizontal) ) ).front;  Add more sliders Use a function to avoid repeating spec code!</description>
-    </item>
-    
-    <item>
-      <title>Creating GUIs</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/gui/creatingguis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/gui/creatingguis/</guid>
-      <description>This library provides utilities for creating GUI elements and connecting them to both patterns and synths. Here are some examples.
-Windows Sliders Buttons </description>
-    </item>
-    
-    <item>
-      <title>HUGO docdock - Easy diagrams</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/tests/mermaid-test/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/tests/mermaid-test/</guid>
-      <description>Some demos The following diagrams are produced by the mermaid tool, just by some simple code as shown below. No plugins required. Use docdock theme with hugo.
-Demo 1 - simple flow chart   Unfold to see code   Code:
-graph LR; A[Hard edge] --&amp;gt;|Link text| B(Round edge) B --&amp;gt; C{Decision} C --&amp;gt;|One| D[Result one] C --&amp;gt;|Two| E[Result two]    graph LR; A[Hard edge] --|Link text| B(Round edge) B -- C{Decision} C --|One| D[Result one] C --|Two| E[Result two]</description>
-    </item>
-    
-    <item>
-      <title>Improving Function:eplay</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/synths/improvingeplay/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/synths/improvingeplay/</guid>
-      <description>Individual improvement steps for Function:eplay: Done and TODO. Thesse notes are from an early stage in development. Now the functionality of most done steps has been integrated in class SynthPlayer.
-Done (11 Jun 2017 21:48)  Store the resulting synth in envir under [\synths, synthName] (default for synthName=: =synth). If previous synth exists under [\synths, synthName] path, then free/release it. When a synth ends, remove it from its path in envir.</description>
-    </item>
-    
-    <item>
-      <title>Mini-Language Overview</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/overviews/minilanguageoverview/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/overviews/minilanguageoverview/</guid>
-      <description>The classes, methods and operators provided by sc-hacks extend SuperCollider to simplify the coding of GUI and of sound / musical structure / interaction. They are designed in the sense of a very small language. Here is a summary.
-Items connected to currentEnvironment: GUI, Synths, Patterns, Routines Operator and message overview This is a draft: Implementation of the following operators has just started. The purpose of the overview is to guide coding by keeping the different versions discrete and consistent.</description>
-    </item>
-    
-    <item>
-      <title>Modify Patterns while playing</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/patterns/eventstream/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/patterns/eventstream/</guid>
-      <description>An EventStream makes it easy to modify patterns while playing them.
-How it works An EventPattern creates EventStreams which are played by EventStreamPlayer. EventStream stores an event whose values are streams and uses this to produce a new event which is played by EventStreamPlayer. It is thus possible to modify the event stored in the EventStream while the EventStreamPlayer is playing it. This makes it easy to modify a playing pattern (which is difficult when using Pbind).</description>
-    </item>
-    
-    <item>
-      <title>Nevent: Environment that notifes variable updates</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/nevent/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/nevent/</guid>
-      <description>Nevent is an EnvironmentRedirect that notifies the changes of value of its variables.
- It is used to provide an environment for playing Synths and Patterns. The environment variables contained in it define parameters for creating Synths and Patterns. Such parameters are: the target where a synth is created (usually a Group). the out or in parameters which designate the buses for audio or control signal input and output. Any other synth parameters such as amp, freq, gate etc.</description>
-    </item>
-    
-    <item>
-      <title>Notification: Register a function callback to a message and a pair of objects</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/notification/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/notification/</guid>
-      <description>Notification is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol.</description>
-    </item>
     
     <item>
       <title>Operator Overview</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/overviews/operatordesign/</link>
+      <link>/main/002-operator-overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/overviews/operatordesign/</guid>
+      <guid>/main/002-operator-overview/</guid>
       <description>sc-hacks uses binary operators to shorten and help classify the coding of common operations such as playing a synth or a pattern. The syntax of a binary operator in SuperCollider is:
 receiver operator[optional: .adverb] argument  For example:
 // receiver operator adverb argument { WhiteNoise.ar(0.1) } +&amp;gt;.newenvir \mysynth  Here is a list of operators introduced in sc-hacks.
@@ -125,115 +24,181 @@ List of Operators Planned are 4 operators taking functions as argument, 4 operat
     </item>
     
     <item>
-      <title>Pattern and Synth play scenarios</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/use-scenarios/patternsynthplay/</link>
+      <title>Mini-Language Overview</title>
+      <link>/main/003-mini-language-overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/use-scenarios/patternsynthplay/</guid>
-      <description>Event:eplay and SynthPlayer can play with several instances in parallel on the same environment, and also provide several additional features. This section gives some examples that explore these features and show how they work and notes some questions regarding future features.
-Creating, starting and stopping patterns Playing several patterns in the same environment Playing several synths in the same environment </description>
+      <guid>/main/003-mini-language-overview/</guid>
+      <description>The classes, methods and operators provided by sc-hacks extend SuperCollider to simplify the coding of GUI and of sound / musical structure / interaction. They are designed in the sense of a very small language. Here is a summary.
+Items connected to currentEnvironment: GUI, Synths, Patterns, Routines Operator and message overview This is a draft: Implementation of the following operators has just started. The purpose of the overview is to guide coding by keeping the different versions discrete and consistent.</description>
+    </item>
+    
+    <item>
+      <title>Improving Function:eplay</title>
+      <link>/main/004-improving_eplay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/main/004-improving_eplay/</guid>
+      <description>Individual improvement steps for Function:eplay: Done and TODO. Thesse notes are from an early stage in development. Now the functionality of most done steps has been integrated in class SynthPlayer.
+Done (11 Jun 2017 21:48)  Store the resulting synth in envir under [\synths, synthName] (default for synthName=: =synth). If previous synth exists under [\synths, synthName] path, then free/release it. When a synth ends, remove it from its path in envir.</description>
+    </item>
+    
+    <item>
+      <title>Play a function in the environment</title>
+      <link>/main/005-function-eplay/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/main/005-function-eplay/</guid>
+      <description>Provide arguments for playing a function from values found in an environment. connect all control names in the function&#39;s arguments to an environment for auto-update Free all notifications from the synth when it stops playing.  Method code + Function { eplay { | envir = \envir | var synth; envir = envir.asEnvironment; envir use: { var argNames, args; argNames = this.def.argNames; args = argNames.collect ({ | name | [name, currentEnvironment [name]] }).</description>
+    </item>
+    
+    <item>
+      <title>Playing Events as Patterns</title>
+      <link>/patterns/007-playing-events-as-patterns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/patterns/007-playing-events-as-patterns/</guid>
+      <description>/sc-hacks/ *sc-hacks* /sh-hacks/ provides two ways to play Events as patterns: \name pplay: (event ...) Play event as EventPattern, using default play key settings, i.e. playing notes unless something else is specified. (event ...) eplay: \name Play event as EventPattern using a custom partial event type \envEvent. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of \degree, \ctranspose and related keys, to currentEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>Playing Events as Patterns</title>
+      <link>/patterns/008-events-as-patterns/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/patterns/008-events-as-patterns/</guid>
+      <description>sc-hacks provides two ways to play Events as patterns: \name pplay: (event ...) Play event as EventPattern, using default play key settings, i.e. playing notes unless something else is specified. (event ...) eplay: \name Play event as EventPattern using a custom partial event type \envEvent. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of \degree, \ctranspose and related keys, to currentEnvironment.</description>
+    </item>
+    
+    <item>
+      <title>Modify Patterns while playing</title>
+      <link>/patterns/009-event-stream/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/patterns/009-event-stream/</guid>
+      <description>An EventStream makes it easy to modify patterns while playing them.
+How it works An EventPattern creates EventStreams which are played by EventStreamPlayer. EventStream stores an event whose values are streams and uses this to produce a new event which is played by EventStreamPlayer. It is thus possible to modify the event stored in the EventStream while the EventStreamPlayer is playing it. This makes it easy to modify a playing pattern (which is difficult when using Pbind).</description>
     </item>
     
     <item>
       <title>Patterns updating current environment</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/patterns/eventeplay/</link>
+      <link>/patterns/010-event-eplay/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/patterns/eventeplay/</guid>
+      <guid>/patterns/010-event-eplay/</guid>
       <description>anEnvironment.eplay(envir)
 Play an event as EventPattern, updating the values in envir from each event. Use custom event type: envEvent. This only updates the values in the environment. The sound must be generated by Function:eplay. See examples below.
 Play the receiver Event in the environment given in argument envir using a custom event type to just set the values of corresponding variables at each event. For example, playing () set ~freq to 60.</description>
     </item>
     
     <item>
-      <title>Play a function in the environment</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/synths/function-eplay/</link>
+      <title>Creating GUIs</title>
+      <link>/gui/012-creating-guis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/synths/function-eplay/</guid>
-      <description>Provide arguments for playing a function from values found in an environment. connect all control names in the function&#39;s arguments to an environment for auto-update Free all notifications from the synth when it stops playing.  Method code + Function { eplay { | envir = \envir | var synth; envir = envir.asEnvironment; envir use: { var argNames, args; argNames = this.def.argNames; args = argNames.collect ({ | name | [name, currentEnvironment [name]] }).</description>
+      <guid>/gui/012-creating-guis/</guid>
+      <description>This library provides utilities for creating GUI elements and connecting them to both patterns and synths. Here are some examples.
+Windows Sliders Buttons </description>
     </item>
     
     <item>
-      <title>Playing Events as Patterns</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/patterns/playingeventsaspatterns/</link>
+      <title>Building GUIs</title>
+      <link>/gui/013-building-guis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/patterns/playingeventsaspatterns/</guid>
-      <description>/sc-hacks/ provides two ways to play Events as patterns: \name pplay: (event ...) Play event as EventPattern, using default play key settings, i.e. playing notes unless something else is specified. (event ...) eplay: \name Play event as EventPattern using a custom partial event type \envEvent. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of \degree, \ctranspose and related keys, to currentEnvironment.</description>
+      <guid>/gui/013-building-guis/</guid>
+      <description>This notebook shows how to build GUIs starting from scratch, with minimal code and in small steps.
+Just a window //: 1 Just a window Window (&amp;quot;window name&amp;quot;).front;  Add a slider and resize. Use VLayout for automatic resizing.
+Window (&amp;quot;window name&amp;quot;) .view.layout_ ( VLayout ( Slider () ) ).front; //: Make the slider horizontal. Window (&amp;quot;window name&amp;quot;) .view.layout_ ( VLayout ( Slider () .orientation_ (\horizontal) ) ).front;  Add more sliders Use a function to avoid repeating spec code!</description>
+    </item>
+    
+    <item>
+      <title>Triggering Methods</title>
+      <link>/buffers_and_grains/015-triggering-methods/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/buffers_and_grains/015-triggering-methods/</guid>
+      <description>This section illustrates several different ways to trigger grains, envelopes or other gate-triggered UGens
+Triggering from lang with set Triggering internally UGens Impulse, Dust etc. Demand UGens </description>
+    </item>
+    
+    <item>
+      <title>Triggering EnvGen and Line</title>
+      <link>/buffers_and_grains/016-triggering-envgen/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/buffers_and_grains/016-triggering-envgen/</guid>
+      <description>Besides controlling the amplitude shape of a single sound-event or note in its entirety, envelopes can also be used to generate streams of sound events with the same synth. The same technique can also be applied to Line or Xline to arbitrarily construct shapes controlling any parameter on the fly. Here are some examples explaining how to do this using either just the default SCClassLibrary and the sc-hacks library.
+ Two items are necessary to re-trigger envelope or line-segment UGens in a Synth: The doneAction argument of the UGen in question must have a value of 0 in order to keep the Synth alive afer the UGen has finished playing.</description>
     </item>
     
     <item>
       <title>Playing Grains</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/playinggrains/</link>
+      <link>/buffers_and_grains/017-playing-grains/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/playinggrains/</guid>
+      <guid>/buffers_and_grains/017-playing-grains/</guid>
       <description>Here are some examples for playing grains of sound from a buffer with
 To be provided ...</description>
     </item>
     
     <item>
       <title>Playing With Data</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/playingwithdata/</link>
+      <link>/data/019-playing-with-data/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/playingwithdata/</guid>
+      <guid>/data/019-playing-with-data/</guid>
       <description>This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer.
 Data dimensions and play method The data is a 2 dimensional array. It is played as a Pseq along the first dimension. This results in a stream of rows. Each subsequent element returned by the stream is a row of data.
 Different ways of playing rows Playing each data row as one Synth Playing each d </description>
     </item>
     
     <item>
-      <title>Registry: Hierarchical Namespaces</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/registry/</link>
+      <title>Server Objects</title>
+      <link>/server_objects/021-server-objects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/basic-principles/foundation-classes/registry/</guid>
+      <guid>/server_objects/021-server-objects/</guid>
+      <description>Server Each Nevent Environment has only one Server instance. Synths and Patterns play in that instance.
+Open issue: Where to store the server of an Environment. Possibilities:
+ As variable ~server In Library using Registry, using [environment \server] as key In prototype event for Nevent. (Needs to be programmed yet). Do not store, use Server.default  Currently option 4 is used, to concentrate on finishing the other features of the library.</description>
+    </item>
+    
+    <item>
+      <title>Registry: Hierarchical Namespaces</title>
+      <link>/basic_classes/023-registry/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/basic_classes/023-registry/</guid>
       <description>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found.</description>
     </item>
     
     <item>
-      <title>Store Specs and SynthDefs in Library</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/basic-principles/principles/storespecsandsynthdefsinlibrary/</link>
+      <title>Notification</title>
+      <link>/basic_classes/024-notification/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/basic-principles/principles/storespecsandsynthdefsinlibrary/</guid>
-      <description>Specs and SynthDefs should be stored in Library using Registry. Advantages:
- simplify and unify the API for accessing Specs and SynthDefs (and SynthDescs). provide global access to Specs and SynthDefs for all environments, guis, synths using spec/synthdef name. ensure SynthDefs are always loaded when the server is rebooted, also when it is a remote server. provide easy global access to SynthDescs for automatic GUI generation.  </description>
+      <guid>/basic_classes/024-notification/</guid>
+      <description>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol.</description>
     </item>
     
     <item>
-      <title>Test slide</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/tests/slide-test/</link>
+      <title>Pattern and Synth play scenarios</title>
+      <link>/use_examples/026-pattern-synth-play/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/tests/slide-test/</guid>
-      <description>This is a slide test This is content
-This is the second section This is the content of the second section.
-This is the third section The slide should appear below somehow.
-Embedding mermaid does not work
-Javascript works as code.  quote and un-quote. italics bold</description>
+      <guid>/use_examples/026-pattern-synth-play/</guid>
+      <description>Event:eplay and SynthPlayer can play with several instances in parallel on the same environment, and also provide several additional features. This section gives some examples that explore these features and show how they work and notes some questions regarding future features.
+Creating, starting and stopping patterns Playing several patterns in the same environment Playing several synths in the same environment </description>
     </item>
     
     <item>
-      <title>Triggering EnvGen and Line</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/triggeringenvgen/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>header</title>
+      <link>/_header/</link>
+      <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/triggeringenvgen/</guid>
-      <description>Besides controlling the amplitude shape of a single sound-event or note in its entirety, envelopes can also be used to generate streams of sound events with the same synth. The same technique can also be applied to Line or Xline to arbitrarily construct shapes controlling any parameter on the fly. Here are some examples explaining how to do this using either just the default SCClassLibrary and the sc-hacks library.
-Basic Examples  Two items are necessary to re-trigger envelope or line-segment UGens in a Synth: The doneAction argument of the UGen in question must have a value of 0 in order to keep the Synth alive afer the UGen has finished playing.</description>
-    </item>
-    
-    <item>
-      <title>Triggering Methods</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/triggeringmethods/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/exploring-techniques/triggeringmethods/</guid>
-      <description>This section illustrates several different ways to trigger grains, envelopes or other gate-triggered UGens
-Triggering from lang with set Triggering internally UGens Impulse, Dust etc. Demand UGens </description>
+      <guid>/_header/</guid>
+      <description>sc-hacks Documentation</description>
     </item>
     
   </channel>

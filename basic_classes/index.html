@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Patterns :: sc-hacks documentation</title>
+    <title>Basic Classes :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
     <link href="/css/nucleus.css" rel="stylesheet">
     <link href="/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/patterns/">
+  <body class="" data-url="/basic_classes/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -142,15 +142,15 @@
 
 
 <li data-nav-id="/patterns/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="/patterns/">
     <span>Patterns</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -388,15 +388,15 @@ active
 
 
 <li data-nav-id="/basic_classes/" class="dd-item 
-
-
+parent
+active
 
 ">
   <a href="/basic_classes/">
     <span>Basic Classes</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -503,7 +503,7 @@ active
 
 
 
- <a href='/'>Main</a> > Patterns
+ <a href='/'>Main</a> > Basic Classes
 
  
 
@@ -521,7 +521,7 @@ active
         
         <div id="body-inner">
           
-            <h1>Patterns</h1>
+            <h1>Basic Classes</h1>
           
 
 
@@ -547,12 +547,12 @@ active
 	</div>
 
 	
-	   <article class="post patterns">
+	   <article class="post basic_classes">
     <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/007-playing-events-as-patterns/">Playing Events as Patterns</a></h2>
+        <h2 class="post-title"><a href="/basic_classes/023-registry/">Registry: Hierarchical Namespaces</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>/sc-hacks/ *sc-hacks* /sh-hacks/ provides two ways to play Events as patterns: \name pplay: (event ...) Play event as EventPattern, using default play key settings, i.e. playing notes unless something else is specified. (event ...) eplay: \name Play event as EventPattern using a custom partial event type \envEvent. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of \degree, \ctranspose and related keys, to currentEnvironment. <a class="read-more" href="/patterns/007-playing-events-as-patterns/">&raquo;</a></p>
+        <p>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found. <a class="read-more" href="/basic_classes/023-registry/">&raquo;</a></p>
     </section>
     <footer class=" footline" >
          
@@ -568,57 +568,12 @@ active
 
 
 	
-	   <article class="post patterns">
+	   <article class="post basic_classes">
     <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/008-events-as-patterns/">Playing Events as Patterns</a></h2>
+        <h2 class="post-title"><a href="/basic_classes/024-notification/">Notification</a></h2>
     </header>
     <section class="post-excerpt">
-        <p>sc-hacks provides two ways to play Events as patterns: \name pplay: (event ...) Play event as EventPattern, using default play key settings, i.e. playing notes unless something else is specified. (event ...) eplay: \name Play event as EventPattern using a custom partial event type \envEvent. This does not produce any sounds per default, but only writes the results of playing all streams in the event, including the default translations of \degree, \ctranspose and related keys, to currentEnvironment. <a class="read-more" href="/patterns/008-events-as-patterns/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post patterns">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/009-event-stream/">Modify Patterns while playing</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>An EventStream makes it easy to modify patterns while playing them.
-How it works An EventPattern creates EventStreams which are played by EventStreamPlayer. EventStream stores an event whose values are streams and uses this to produce a new event which is played by EventStreamPlayer. It is thus possible to modify the event stored in the EventStream while the EventStreamPlayer is playing it. This makes it easy to modify a playing pattern (which is difficult when using Pbind). <a class="read-more" href="/patterns/009-event-stream/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post patterns">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/patterns/010-event-eplay/">Patterns updating current environment</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>anEnvironment.eplay(envir)
-Play an event as EventPattern, updating the values in envir from each event. Use custom event type: envEvent. This only updates the values in the environment. The sound must be generated by Function:eplay. See examples below.
-Play the receiver Event in the environment given in argument envir using a custom event type to just set the values of corresponding variables at each event. For example, playing () set ~freq to 60. <a class="read-more" href="/patterns/010-event-eplay/">&raquo;</a></p>
+        <p>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. <a class="read-more" href="/basic_classes/024-notification/">&raquo;</a></p>
     </section>
     <footer class=" footline" >
          
@@ -730,21 +685,6 @@ Play the receiver Event in the environment given in argument envir using a custo
             
                 
                     
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
                 
                 
                 
@@ -763,29 +703,6 @@ Play the receiver Event in the environment given in argument envir using a custo
         
                     
                         
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
             
             
                 
@@ -852,6 +769,40 @@ Play the receiver Event in the environment given in argument envir using a custo
             
         
                     
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
                         
             
             
@@ -915,6 +866,7 @@ Play the receiver Event in the environment given in argument envir using a custo
             
                 
                     
+                    
                 
                 
                 
@@ -925,6 +877,9 @@ Play the receiver Event in the environment given in argument envir using a custo
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -974,10 +929,10 @@ Play the receiver Event in the environment given in argument envir using a custo
 
 
         
-            <a class="nav nav-prev" href="/main/005-function-eplay/" title="Play a function in the environment"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="/server_objects/021-server-objects/" title="Server Objects"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="/patterns/007-playing-events-as-patterns/" title="Playing Events as Patterns" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="/basic_classes/023-registry/" title="Registry: Hierarchical Namespaces" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
