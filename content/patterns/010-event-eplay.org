@@ -1,6 +1,7 @@
-#+TITLE: Patterns updating current environment
-#+CATEGORIES: methods
-#+TAGS: notification, EnvGen, trigger, EventPattern, Event
++++
+title = "Patterns updating current environment"
+weight = 10
++++
 
 =anEnvironment.eplay(envir)=
 
@@ -22,16 +23,14 @@ Play the receiver Event in the environment given in argument =envir= using a cus
 () eplay: \newEnvir;
 #+END_SRC
 
-* Examples
-
-** Example 1: Single synth, pattern, gui update
+* Example 1: Single synth, pattern, gui update
 
 #+BEGIN_SRC javascript
   (degree: Pbrown (0, 30, 2, inf), dur: 0.1).eplay;
   { | freq = 400 | SinOsc.ar (freq, 0, 0.1 )}.eplay;
   \window.vlayout (CSlider (\freq)).front;
 #+END_SRC
-** Example 2: Envelope gate on-off
+* Example 2: Envelope gate on-off
 To test triggering of envelopes, instead of writing this:
 
 #+BEGIN_SRC javascript
@@ -64,7 +63,7 @@ one may write this:
   //: Note the overlap with the still playing note in the freq change:
   (dur: 0.15, gate: Pseq([0, 1], inf), degree: Pstutter (4, Pbrown (-5, 20, 5, inf))).eplay;
 #+END_SRC
-** Example 3: Many patterns + many synths in same environment
+* Example 3: Many patterns + many synths in same environment
 
 #+BEGIN_SRC javascript
   { | freq = 400 | SinOsc.ar (freq * [1, 1.25], 0, 0.1) }.eplay;

@@ -1,6 +1,7 @@
-#+TITLE: Play a function in the environment
-#+CATEGORIES: methods
-#+TAGS: synth, method, environment
++++
+title = "Play a function in the environment"
+weight = 5
++++
 
 1. Provide arguments for playing a function from values found in an environment.
 2. connect all control names in the function's arguments to an environment for auto-update

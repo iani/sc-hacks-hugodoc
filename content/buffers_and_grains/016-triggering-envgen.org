@@ -1,6 +1,6 @@
 +++
 title = "Triggering EnvGen and Line"
-weight = 3
+weight = 16
 +++
 
 Besides controlling the amplitude shape of a single sound-event or note in its entirety, envelopes can also be used to generate streams of sound events with the same synth.  The same technique can also be applied to Line or Xline to arbitrarily construct shapes controlling any parameter on the fly.  Here are some examples explaining how to do this using either just the default *SCClassLibrary* and the *sc-hacks* library.

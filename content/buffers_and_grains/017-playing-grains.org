@@ -1,7 +1,8 @@
 +++
 title = "Playing Grains"
-weight = 1
+weight = 17
 +++
+
 
 Here are some examples for playing grains of sound from a buffer with 
 

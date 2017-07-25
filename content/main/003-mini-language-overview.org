@@ -1,7 +1,8 @@
 +++
 title = "Mini-Language Overview"
-weight = 1
+weight = 3
 +++
+
 
 The classes, methods and operators provided by /sc-hacks/ extend SuperCollider to simplify the coding of GUI and of sound / musical structure / interaction.  They are designed in the sense of a very small language.  Here is a summary. 
 
@@ -79,10 +80,8 @@ string +> symbol : play synthdef named by string on the symbol as SynthPlayer ?
 
 * Playing Routines
 
-
 * Playing patterns with default note events
 
 * Playing patterns in currentEnvironment
 
 * Creating GUIs
-

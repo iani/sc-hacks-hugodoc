@@ -3,6 +3,7 @@ title = "Operator Overview"
 weight = 2
 +++
 
+
 /sc-hacks/ uses binary operators to shorten and help classify the coding of common operations such as playing a synth or a pattern.  The syntax of a binary operator in SuperCollider is: 
 
 #+BEGIN_SRC javascript

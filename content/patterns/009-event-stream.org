@@ -1,6 +1,7 @@
-#+TITLE: Modify Patterns while playing
-#+CATEGORIES: classes
-#+TAGS: EventStream, EventPattern, EventStreamPlayer
++++
+title = "Modify Patterns while playing"
+weight = 9
++++
 
 An EventStream makes it easy to modify patterns while playing them. 
 

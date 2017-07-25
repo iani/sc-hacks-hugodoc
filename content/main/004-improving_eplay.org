@@ -1,6 +1,7 @@
-#+TITLE: Improving Function:eplay
-#+CATEGORIES: methods, notes
-#+TAGS: design, synth, TODO
++++
+title = "Improving Function:eplay"
+weight = 4
++++
 
 Individual improvement steps for Function:eplay: Done and TODO.  Thesse notes are from an early stage in development.  Now the functionality of most done steps has been integrated in class =SynthPlayer=.  
 
@@ -66,4 +67,3 @@ In addition to listening for changes from the =currentEnvironment=, a second not
 * Drafts
 
 See [[https://github.com/iani/sc-hacks/blob/master/LabCode/rebuildFunctionEplay.scd]] for draft used to build this functionality in =SynthPlayer=
-

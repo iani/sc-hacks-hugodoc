@@ -1,6 +1,6 @@
 +++
 title = "Building GUIs"
-weight = 1
+weight = 13
 +++
 
 This notebook shows how to build GUIs starting from scratch, with minimal code and in small steps.
@@ -221,7 +221,7 @@ END_SRC
 Instead of adding more arguments, move to the next step:
 Define a class and provide the options as defaults.
 
-* Next steps ...
+* Next steps
 
 1. Control a routine from a GUI. 
    - Let the GUI elements set environment variables of an environment.
