@@ -4,6 +4,67 @@ draft = true
 +++
 
 #+COLUMNS: %40ITEM %15FILENAME
+* Introduction
+:PROPERTIES:
+:fol:      introduction
+:END:
+
+** Caveat
+:PROPERTIES:
+:filename: caveat
+:END:
+
+The purpose of the /sc-hacks/ library is to make experimentation and music making in SuperCollider easier, by offering simpler and shorter coding options for tasks that usually require complex and careful coding. Such are:
+
+- Replace one synth with another seamlessly while playing
+- Freely change the contents of patterns while playing
+- Set the parameters of synths either by setting environment variables or through a gui
+- Link outputs and inputs of synths and place them in the right order to filter the output of a synth with another synth
+- Manage sets of code files to be loaded at startup, and of audio files to be loaded when the server boots
+- Map the control signal of synth functions or envelopes to the parameters of a synth.
+
+*** And the caveat is ...
+
+/sc-hacks/ is in *permanent alpha*.  As it says in http://semver.org/, /"If you’re changing the API every day you should either still be in version 0.y.z or on a separate development branch working on the next major version."/.  This library will remain 0.n alpha for a long time, as changes in operator names and syntax are happening constantly.
+
+** History
+:PROPERTIES:
+:filename: history
+:END:
+
+** By way of demo
+:PROPERTIES:
+:filename: demo
+:END:
+
+** Design
+:PROPERTIES:
+:filename: design
+:END:
+
+** The trouble with operators
+:PROPERTIES:
+:filename: operators
+:END:
+
+** A word (or 2) about EMACS
+:PROPERTIES:
+:filename: emacs
+:END:
+
+*** Snippets 
+
+*** Startup files and buffers management with dired
+
+bookmarks, bookmarks+
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Bookmarks.html][bookmarks]], [[https://www.emacswiki.org/emacs/BookmarkPlus][bookmark+]]
+
+*** Getting started with emacs
+
+*** Configuring emacs for SuperCollider
+
+
 * Operators and Language Design
 :PROPERTIES:
 :foldername: main
@@ -1141,12 +1202,26 @@ The data is a 2 dimensional array.  It is played as a =Pseq= along the first dim
   :PROPERTIES:
   :foldername: server_objects
   :END:
-** Server Objects
+** About Server Objects
 :PROPERTIES:
-:filename: server-objects
+:filename: about-server-objects
 :END:
 
-*** Server
+*** Server objects managed by Nevent
+
+These are: 
+
+- The Group which is used to create all Synths in the event.
+- Busses connecting inputs or outputs of Synths in the event to those of other events.
+- Buffers used for playing by Synths
+
+
+*** Allocating Server Objects at Reboot
+
+** Server and Nevent
+   :PROPERTIES:
+   :filename: server-and-nevent
+   :END:
 Each =Nevent= Environment has  only one Server instance.  Synths and Patterns play in that instance.
 
 Open issue: Where to store the server of an Environment.  Possibilities: 
@@ -1158,26 +1233,29 @@ Open issue: Where to store the server of an Environment.  Possibilities:
 
 Currently option 4 is used, to concentrate on finishing the other features of the library.  Adding multiple servers will probably require a =NeventGroup= class whose instances create and manage groups of Nevents playing on the same server. =NeventGroup= will store the selected Server instance in the parent event of each =Nevent= instance which it creates.
 
-*** Server objects managed by Nevent
 
-These are: 
 
-- The Group which is used to create all Synths in the event.
-- Busses connecting inputs or outputs of Synths in the event to those of other events.
-- Buffers used for playing by Synths
-
-*** Allocating Server Objects at Reboot
-
-*** Target
+** Target Group
+   :PROPERTIES:
+   :filename: target-group
+   :END:
 
 *** Maintaining Target Group Order
 
-*** Busses
+** Busses
+   :PROPERTIES:
+   :filename: busses
+   :END:
 
-**** Bus Allocation
+*** Bus Allocation
 
-**** Bus Index Parameter Updates
+*** Bus Index Parameter Updates
 
+
+** Buffers
+   :PROPERTIES:
+   :filename: buffers
+   :END:
 
 * Basic Classes
   :PROPERTIES:
