@@ -1,0 +1,20 @@
++++
+title = "Anti-Mythology"
+weight = 2
++++
+
+*As of August 2017, sc-hacks is being re-done from scratch.
+Both the library and its API will change in the near future.*
+
+The purpose of the /sc-hacks/ library is to make experimentation and music making in SuperCollider easier, by offering simpler and shorter coding options for tasks that usually require complex and careful coding. Such are:
+
+- Replace one synth with another seamlessly while playing
+- Freely change the contents of patterns while playing
+- Set the parameters of synths either by setting environment variables or through a gui
+- Link outputs and inputs of synths and place them in the right order to filter the output of a synth with another synth
+- Manage sets of code files to be loaded at startup, and of audio files to be loaded when the server boots
+- Map the control signal of synth functions or envelopes to the parameters of a synth.
+
+* And the caveat is ...
+
+/sc-hacks/ is in *permanent alpha*.  As it says in http://semver.org/, /"If you’re changing the API every day you should either still be in version 0.y.z or on a separate development branch working on the next major version."/.  This library will remain 0.n alpha for a long time, as changes in operator names and syntax are happening constantly.

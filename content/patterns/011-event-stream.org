@@ -1,6 +1,6 @@
 +++
 title = "Modify Patterns while playing"
-weight = 9
+weight = 11
 +++
 
 An EventStream makes it easy to modify patterns while playing them. 

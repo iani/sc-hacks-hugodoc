@@ -1,6 +1,6 @@
 +++
 title = "Improving Function:eplay"
-weight = 4
+weight = 6
 +++
 
 Individual improvement steps for Function:eplay: Done and TODO.  Thesse notes are from an early stage in development.  Now the functionality of most done steps has been integrated in class =SynthPlayer=.  

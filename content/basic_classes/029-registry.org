@@ -1,6 +1,6 @@
 +++
 title = "Registry: Hierarchical Namespaces"
-weight = 23
+weight = 29
 +++
 
 This class uses the =Library= class to store and  retrieve objects using any array of objects as key.  This extends the way that =Pdef=, =Ndef=, =OSCdef= work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing.  To create this behavior one can then add a method to =Symbol= for accessing the kind of object needed.  For example: =\aSymbol.oscFunc= accesses =OSCFunc= instances. This also allows easier customization of how the object is created if not found. 

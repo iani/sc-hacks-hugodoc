@@ -1,6 +1,6 @@
 +++
 title = "Play a function in the environment"
-weight = 5
+weight = 7
 +++
 
 1. Provide arguments for playing a function from values found in an environment.

@@ -1,6 +1,6 @@
 +++
 title = "Building GUIs"
-weight = 13
+weight = 15
 +++
 
 This notebook shows how to build GUIs starting from scratch, with minimal code and in small steps.

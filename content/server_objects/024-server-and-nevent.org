@@ -1,9 +1,7 @@
 +++
-title = "Server Objects"
-weight = 21
+title = "Server and Nevent"
+weight = 24
 +++
-
-* Server
 Each =Nevent= Environment has  only one Server instance.  Synths and Patterns play in that instance.
 
 Open issue: Where to store the server of an Environment.  Possibilities: 
@@ -14,23 +12,3 @@ Open issue: Where to store the server of an Environment.  Possibilities:
 4. Do not store, use =Server.default=
 
 Currently option 4 is used, to concentrate on finishing the other features of the library.  Adding multiple servers will probably require a =NeventGroup= class whose instances create and manage groups of Nevents playing on the same server. =NeventGroup= will store the selected Server instance in the parent event of each =Nevent= instance which it creates.
-
-* Server objects managed by Nevent
-
-These are: 
-
-- The Group which is used to create all Synths in the event.
-- Busses connecting inputs or outputs of Synths in the event to those of other events.
-- Buffers used for playing by Synths
-
-* Allocating Server Objects at Reboot
-
-* Target
-
-* Maintaining Target Group Order
-
-* Busses
-
-** Bus Allocation
-
-** Bus Index Parameter Updates

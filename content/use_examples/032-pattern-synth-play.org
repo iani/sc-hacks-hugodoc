@@ -1,6 +1,6 @@
 +++
 title = "Pattern and Synth play scenarios"
-weight = 26
+weight = 32
 +++
 
 =Event:eplay= and =SynthPlayer= can play with several instances in parallel on the same environment, and also provide several additional features.  This section gives some examples that explore these features and show how they work and notes some questions regarding future features.

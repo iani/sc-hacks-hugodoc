@@ -3,16 +3,19 @@ title = "MASTER FILE"
 draft = true
 +++
 
-#+COLUMNS: %40ITEM %15FILENAME
+#+COLUMNS: %40ITEM %25foldername %25filename
 * Introduction
 :PROPERTIES:
-:fol:      introduction
+:foldername:      introduction
 :END:
 
-** Caveat
+** Anti-Mythology
 :PROPERTIES:
-:filename: caveat
+:filename: anti-mythology
 :END:
+
+*As of August 2017, sc-hacks is being re-done from scratch.
+Both the library and its API will change in the near future.*
 
 The purpose of the /sc-hacks/ library is to make experimentation and music making in SuperCollider easier, by offering simpler and shorter coding options for tasks that usually require complex and careful coding. Such are:
 
@@ -29,27 +32,74 @@ The purpose of the /sc-hacks/ library is to make experimentation and music makin
 
 ** History
 :PROPERTIES:
-:filename: history
+:filename-not: history
 :END:
+
+/sc-hacks/ was motivated by the need to improve some aspects [[http://doc.sccode.org/Overviews/JITLib.html][JITLib]], such as:
+- The handling of audio busses for linking i/o between synths.
+- The modification of patterns while they are being played with Pbind.
+
+Fascinated by the => operator of [[http://chuck.cs.princeton.edu/doc/language/][ChucK]], and by the idea of [[http://doc.sccode.org/Reference/Adverbs.html][adverbs for binary operators]] in SuperCollider, I wanted to explore binary operators as a way to write commonly used expressions in a shorter way.  
+
+The first results of these attempts are the libraries [[tiny-sc]] and [[tiny-inc]].  These have many shortcomings, which the present library is trying to fix.  At present, /sc-hacks/ is being redesigned once more, in order to implement two of the most attractive features of JITLib: sequential playing synth-functions and patterns in one =Ndef= and linking the output of an Ndef to the input of another Ndef.
+
+*** Future plans: Audio Feedback between synths
+
+A particularly interesting case is when an Ndef reads and processes its own output.  An implementation of this feature, using [[http://doc.sccode.org/Classes/InFeedback.html][InFeedback]] is planned for the future.
 
 ** By way of demo
 :PROPERTIES:
-:filename: demo
+:filename-not: demo
 :END:
+
+*** Synths
+
+Start a synth
+
+#+BEGIN_SRC javascript
+\default +> \example1;
+#+END_SRC
+
+Control the parameters of the synth from the enviroment
+
+
+Replace the synth with a different synth
+
+#+BEGIN_SRC javascript
+{ SinOsc.ar(\freq.kr(440, )[]) }
+#+END_SRC
+
+Notice that the new synth reads the current values for each parameter from the environment.
+
+
+Use a simple gui to control synth parameters
+
+
+Start a second synth in a new environment
+
+#+BEGIN_SRC javascript
+
+#+END_SRC
+
+Notice that the synth in the new environment 
+
+
+One can jump between 
+
 
 ** Design
 :PROPERTIES:
-:filename: design
+:filename-not: design
 :END:
 
 ** The trouble with operators
 :PROPERTIES:
-:filename: operators
+:filename-not: operators
 :END:
 
 ** A word (or 2) about EMACS
 :PROPERTIES:
-:filename: emacs
+:filename-not: emacs
 :END:
 
 *** Snippets 

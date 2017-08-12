@@ -1,0 +1,15 @@
++++
+title = "About Server Objects"
+weight = 23
++++
+
+* Server objects managed by Nevent
+
+These are: 
+
+- The Group which is used to create all Synths in the event.
+- Busses connecting inputs or outputs of Synths in the event to those of other events.
+- Buffers used for playing by Synths
+
+
+* Allocating Server Objects at Reboot

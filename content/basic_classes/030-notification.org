@@ -1,6 +1,6 @@
 +++
 title = "Notification"
-weight = 24
+weight = 30
 +++
 
 Notification: Register a function callback to a message and a pair of objects

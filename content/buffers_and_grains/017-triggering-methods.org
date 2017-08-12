@@ -1,6 +1,6 @@
 +++
 title = "Triggering Methods"
-weight = 15
+weight = 17
 +++
 
 This section illustrates several different ways to trigger grains, envelopes or other gate-triggered UGens

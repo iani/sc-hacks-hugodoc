@@ -1,6 +1,6 @@
 +++
 title = "Playing With Data"
-weight = 19
+weight = 21
 +++
 
 This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer. 

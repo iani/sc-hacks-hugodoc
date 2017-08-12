@@ -1,6 +1,6 @@
 +++
 title = "Patterns updating current environment"
-weight = 10
+weight = 12
 +++
 
 =anEnvironment.eplay(envir)=
