@@ -1,0 +1,134 @@
++++
+title = "Triggering EnvGen and Line"
+weight = 16
++++
+
+Besides controlling the amplitude shape of a single sound-event or note in its entirety, envelopes can also be used to generate streams of sound events with the same synth.  The same technique can also be applied to Line or Xline to arbitrarily construct shapes controlling any parameter on the fly.  Here are some examples explaining how to do this using either just the default *SCClassLibrary* and the *sc-hacks* library.
+
+Two items are necessary to re-trigger envelope or line-segment UGens in a Synth:
+1. The =doneAction= argument of the UGen in question must have a value of 0 in order to keep the Synth alive afer the UGen has finished playing.
+2. The UGen in question must use a control in its =gate= argument. The UGen restarts whenever the value of the =gate= control changes from 0 to 1.  Furthermore, if the Envelope contains a release part, then the release part will be triggered when the =gate= control changes from 1 to 0.
+
+* Caution: Use a name other than =gate= as control name for triggering
+
+*NOTE: The control used to trigger the EnvGen /must have a name different than/ =gate=, otherwise SC will be unable to release the synth because it creates a second =gate= control by default when creating synthdefs from functions.  For example: 
+
+#+BEGIN_SRC sclang
+  //: This is wrong:
+  a =  { | freq = 400, gate = 0 |
+	  var env;
+	  env = Env.adsr ();
+	  SinOsc.ar (freq, 0, 0.1)
+	  ,* EnvGen.kr (env, gate: gate, doneAction: 0)
+  }.play;
+  NodeWatcher.register (a); // register a to update state when it ends
+  //: Test if a is playing
+  a.isPlaying;
+  // first let it make a sound:
+  a.set (\gate, 1);
+  //: then try to release it:
+  a.release;
+  //: The output amplitude is 0 but the synth is still playing:
+  a.isPlaying;
+  //: Try again, specifying a release time:
+  a.release (0.1);
+  //: To really stop the synth, you have to free it
+  a.free;
+  //: The synth has stopped playing. Synth count should be 0 in the server display
+  a.isPlaying; // returns false
+#+END_SRC
+
+* Function play and Synth set (SCClassLibrary)
+Here is a simple example using only the standard SCClassLibrary:
+
+#+BEGIN_SRC sclang
+  //: Start a triggerable synth and store it in variable a
+  // Note: The EnvGen will not be triggered because trig is 0.
+  // Thus the synth will not produce an audible signal.
+
+  // use trig instead of gate as control name!
+  a = { | freq = 400, trig = 0 |
+	  var env;
+	  env = Env.adsr ();
+	  SinOsc.ar (freq, 0, 0.1)
+	  ,* EnvGen.kr (env, gate: trig, doneAction: 0)
+  }.play;
+  //: Trigger the envelope
+  a.set (\trig, 1);
+  //: Release the envelope
+  a.set (\trig, 0);
+  //: Re-trigger the nevelope
+  a.set (\trig, 1);
+  //: Release the envelope again
+  a.set (\trig, 0);
+  //: Run a routine to start and stop the synth several times
+  {
+	  10 do: { | i |
+		  a.set (\trig, (i + 1) % 2); // i+1 : start with trigger on
+		  0.01.exprand (0.5).wait;
+	  }
+  }.fork;
+  //: Do the same as above, but also change the frequency
+  {
+	  40 do: { | i |
+		  // only change frequency when starting, not when releasing:
+		  if (i + 1 % 2 > 0) { // i / 2: wholetone -> chromatic
+			  a.set (\freq, (i / 2 + 60).midicps, \trig, 1);			
+		  }{
+			  a.set (\trig, 0);
+		  };
+		  0.01.exprand (0.5).wait;
+	  };
+  }.fork;
+  //:
+
+#+END_SRC
+
+* Control through environment variables, using Function =+>=
+
+In /sc-hacks/, the operator =+>= plays a function and stores its synth in the global Library using a =SynthPlayer= instance.  Additionally, it makes the synth react whenever an environment variable whose name corresponds to a control parameter of the synth is set in the =currentEnvironment=.  This makes it easy to control the synth through the environment.
+
+#+BEGIN_SRC sclang
+  { | freq = 400, trig = 0 |
+	  var env;
+	  env = Env.adsr ();
+	  SinOsc.ar (freq, 0, 0.1)
+	  ,* EnvGen.kr (env, gate: trig, doneAction: 0)
+  } +> \test;
+  //:
+  ~trig = 1;
+  //:
+  ~trig = 0;
+  //:
+  {
+	  var trig;
+	  inf do: { | i |
+		  trig = i + 1 % 2;
+		  if (trig > 0) { ~freq = 300 rrand: 3000 };
+		  ~trig = trig;
+		  0.9.rand.wait;
+	  };
+  }.rout;
+  // rout starts a routine like fork, and stores it in the library
+  // under a name (default: 'routine')
+  // Additionally, if a routine is running under the same name,
+  // it stops that routine before starting the new one to replace it.
+  //:
+  {
+	  var trig;
+	  26 do: { | i |
+		  trig = i + 1 % 2;
+		  if (trig > 0) { ~freq = (i / 2 + 60).midicps };
+		  ~trig = trig;
+		  0.24.wait;
+	  };
+  }.rout;
+  //:
+  {
+	  20 do: { | i |
+		  ~trig = i + 1 % 2;
+		  ~freq = 300 rrand: 3000;
+		  0.9.rand.wait;
+	  }
+  }.rout;
+#+END_SRC

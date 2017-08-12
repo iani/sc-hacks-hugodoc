@@ -1,0 +1,195 @@
++++
+title = "Operator Overview"
+weight = 2
++++
+
+
+/sc-hacks/ uses binary operators to shorten and help classify the coding of common operations such as playing a synth or a pattern.  The syntax of a binary operator in SuperCollider is: 
+
+#+BEGIN_SRC javascript
+receiver operator[optional: .adverb] argument
+#+END_SRC
+
+For example:
+
+#+BEGIN_SRC javascript
+// receiver      operator adverb   argument
+{ WhiteNoise.ar(0.1) } +>.newenvir \mysynth
+#+END_SRC
+
+Here is a list of operators introduced in /sc-hacks/.
+
+* List of Operators
+
+Planned are 4 operators taking functions as argument, 4 operators taking event as argument, and 5 operators taking a symbol as argument. Currently (26 Jun 2017 08:57) the 8 first operators have been tested.
+
+1. ={ function } +> synthname = play as synth
+1. ={ function } *> synthname= play as routine (fork)
+1. ={ function } **> synthname= wrap in loop and play as routine (fork)
+1. ={ function } <* key= evaluate function whenever value of key is set in envir
+1. =( event ) @> patternname= play
+1. =( event ) @>+ patternname= addEvent
+1. =( event ) @>! patternname= setEvent
+1. =( event ) <@ key= play next event from EventStream created from event, whenever value of key is set in envir.
+1. =receiver &> argument= set the output bus of the receiver to the input bus of the argument (only the output bus of the receiver changes)
+1. =receiver <& argument= set the input bus of the argument to the output bus of the receiver (only the input bus of the argument changes)
+1. =receiver &>! argument= set the output bus of the receiver to the input bus of the argument, - on a new private bus (both receiver and argument change)
+1. =receiver &/> argument= Copy the output signal of the receiver from its bus onto the input bus of the argument, using a signal copy synth. (neither receiver nor argument changes).
+1. =receiver </> argument= Copy the output signal of the receiver onto a new private bus, and the signal from that private bus onto the input bus of the argument, using 2 signal copy synths (neither receiver nor argument changes).
+
+* Examples
+
+#+BEGIN_SRC javascript
+// ================================================================
+// ================ Routines
+//: Start a routine 
+{
+	loop {
+		~freq = 500 rrand: 4000;
+		1.wait;
+	}
+} *> \rout1
+//: replace this with a different routine
+{
+	loop {
+		~freq = 100 rrand: 400;
+		0.2.exprand (0.5).wait;
+	}
+} *> \rout1
+//: Shortcut for loop {}
+{
+	~freq = 50 exprand: 400;
+	0.1.wait;
+} **> \rout1;
+//: stop the routine
+\rout1.routine.stop;
+
+// ================================================================
+// ================ Patterns
+//: start a new pattern
+(dur: 0.1, degree: Pseq ((0..7), inf)) @> \pat1;
+//: replace the pattern running at \pat1 with a new one
+(dur: Pwhite (0.01, 0.1, inf), degree: Pwhite(0, 7, inf)) @> \pat1;
+//: add event's contents to the playing event
+(dur: Pwhite (0.01, 2.1, inf)) @>+ \pat1;
+//: testing function in event key
+// Defer runs the function after the event has played all parameters
+(func1: {{ postf("freq param is: %\n", ~freq )}.defer }) @>+ \pat1;
+
+//: ================================================================
+//: ================ More function operators
+//: Testing function in envir
+{ | freq | { SinOsc.ar(freq, 0, EnvGen.kr(Env.perc(0.01, 0.1, 0.1)))}.play } <* \freq;
+
+//: ========== Polyphony: EventStreams triggered by a pattern playing in currentEnvironment
+() @> \pat1;
+// { ~freq.postln; } <* \freq; // just as a test;
+(degree: Pseq((0..7), inf)) <@ \freq;
+//: add another stream on a different label
+(degree: Pseq((0..7).scramble, inf)) <@.label2 \freq;
+//: add another stream on a different label yet
+(degree: Pseq((0..7) + 10, inf), dur: 0.1) <@.label3 \freq;
+//:
+#+END_SRC
+
+* Additional possible operators
+
+Draft: 
+
+** Within the currentEnvironment Nevent
+
+When one (or any) parameter in the currentEnvironment changes:
+
+1. Play an event (from an EventPattern / EventStream) =<@=
+1. Play a synth from a SynthPlayer =<+=
+
+**  Within an EventStreamPlayer playing within an Nevent (with Event @>)
+
+- Play an event (from an EventPattern / EventStream)
+- Evaluate a function
+
+* General principle: 4 types of objects stored under names in environments.
+
+*  Function:play: ={} +>.envir \playerName=
+
+#+BEGIN_SRC javascript
+  // Start a synth and store it in \synth1
+  { SinOsc.ar(\freq.kr(400), 0, \amp.kr(0.1)) } +> \synth1;
+  //: Start a routine modifying the freq parameter
+  {
+	  loop {
+		  ~freq = 50 rrand: 100;
+		  5.1.wait;
+	  }
+  } rout: \envir;
+  //: Replace the function playing in \synth1
+  { Ringz.ar (WhiteNoise.ar (\amp.kr (0.1)), \freq.kr (400)) } +> \synth1;
+  //: Start a synth in a different environment
+  { LFSaw.ar(\freq.kr(400), 0, \amp.kr(0.1)) } +>.envir2 \synth1;
+  //: Start a routine modifying the freq parameter in the second environment
+  {
+	  loop {
+		  ~freq = 400 rrand: 4000;
+		  0.1.wait;
+	  }
+  } rout: \envir2;
+  //: Test the contents of the library
+  Library.global.dictionary;
+#+END_SRC
+
+* Accessing SynthPlayers, EventPatterns/EventStreamPlayers, Routines and Windows
+
+The following messages are used to access a SynthPlayer, EventStreamPlayer, Routine or Window stored under a name in an environment.  If no enviroment is specified, then the currentEnvironment is used. 
+
+- =symbol.synth(optional: envir)=
+- =symbol.pattern(optional: envir)=
+- =symbol.routine(optional: envir)=
+- =symbol.window(optional: envir)=
+
+Additionally, the following introspection methods are provided: 
+
+- =Nevent:envirs= : Dictionary with all Nenvirs stored in Library under =\environments=
+- =Registry;envirs= : Synonym of =Nevent:envirs=
+- =\envirName.synths= : All synth players of Nenvir named =\envirName=.
+- =\envirName.patterns= : All EventStreamPlayers of Nenvir named =\envirName=.
+- =\envirName.routines= : All Routines of Nenvir named =\envirName=.
+- =\envirName.windows= : All windows of Nenvir named =\envirName=.
+
+** Method implementation code
+The code implementing these methods for =Symbol= in =Nevent.sc= is: 
+
+#+BEGIN_SRC javascript
+ // Return nil if no element found.
+  // Also, do not push the environment if created.
+  synth { | envir |
+	  ^Registry.at (envir.asEnvironment (false), \synths, this);
+  }
+
+  pattern { | envir |
+	  ^Registry.at (envir.asEnvironment (false), \patterns, this);
+  }
+
+  routine { | envir |
+	  ^Registry.at (envir.asEnvironment (false), \routines, this);
+  }
+
+  window { | envir, rect |
+	  // always construct new window, and push the environment
+	  ^Registry (envir.asEnvironment, \windows, this, {
+		  Window (this, rect)
+		  .onClose_ ({ | me | me.objectClosed; });
+	  })
+  }
+#+END_SRC
+
+** Tests
+
+#+BEGIN_SRC javascript
+//: explicitly push \envir as currentEnvironment (only for clarity).
+\envir.push;
+//: Initially, no synth is available:
+\envir.synths;
+//: Also no synth is available in 
+//: Play a function in envir: 
+{ PinkNoise.ar(0.2) } +>.envir \test;
+#+END_SRC
