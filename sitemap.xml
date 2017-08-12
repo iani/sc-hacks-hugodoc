@@ -8,15 +8,23 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/main/002-operator-overview/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/introduction/002-anti-mythology/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/main/003-mini-language-overview/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/introduction/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/main/004-improving_eplay/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/main/004-operator-overview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/main/005-mini-language-overview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/main/006-improving_eplay/</loc>
   </url>
   
   <url>
@@ -24,19 +32,19 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/main/005-function-eplay/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/main/007-function-eplay/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/007-playing-events-as-patterns/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/009-playing-events-as-patterns/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/008-events-as-patterns/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/010-events-as-patterns/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/009-event-stream/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/011-event-stream/</loc>
   </url>
   
   <url>
@@ -44,15 +52,15 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/010-event-eplay/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/patterns/012-event-eplay/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/gui/012-creating-guis/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/gui/014-creating-guis/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/gui/013-building-guis/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/gui/015-building-guis/</loc>
   </url>
   
   <url>
@@ -60,15 +68,15 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/015-triggering-methods/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/017-triggering-methods/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/016-triggering-envgen/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/018-triggering-envgen/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/017-playing-grains/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/019-playing-grains/</loc>
   </url>
   
   <url>
@@ -76,7 +84,7 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/data/019-playing-with-data/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/data/021-playing-with-data/</loc>
   </url>
   
   <url>
@@ -84,7 +92,23 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/021-server-objects/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/023-about-server-objects/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/024-server-and-nevent/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/025-target-group/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/026-busses/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/027-buffers/</loc>
   </url>
   
   <url>
@@ -92,7 +116,7 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/023-registry/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/029-registry/</loc>
   </url>
   
   <url>
@@ -100,11 +124,11 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/024-notification/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/030-notification/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/use_examples/026-pattern-synth-play/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/use_examples/032-pattern-synth-play/</loc>
   </url>
   
   <url>

@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Main :: sc-hacks documentation</title>
+    <title>Playing With Data :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/data/021-playing-with-data/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -352,7 +352,7 @@
 
 
 <li data-nav-id="/data/" class="dd-item 
-
+parent
 
 
 ">
@@ -360,7 +360,7 @@
     <span>Playing with data</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -369,7 +369,7 @@
         
          
           <li data-nav-id="/data/021-playing-with-data/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/data/021-playing-with-data/">
             <span>Playing With Data</span> 
@@ -567,25 +567,69 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
         
+          <div id="top-bar">
+            
+
+            <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <span id="sidebar-toggle-span">
+                  <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </span>
+                <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                <span class="links">
+                
+
+
+
+
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/data/'>Playing with data</a> > Playing With Data
+
+ 
+
+ 
+
+   
+                </span>
+            </div>
+            <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+          </div>
+        
         
         <div id="body-inner">
+          
+            <h1>Playing With Data</h1>
           
 
 
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
 
- 
-<p>Documentation of sc-hacks library for SuperCollider</p>
+<p>This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer.</p>
 
-<p><a href="https://github.com/iani/sc-hacks">https://github.com/iani/sc-hacks</a></p>
+<h1 id="data-dimensions-and-play-method">Data dimensions and play method</h1>
 
-<p>As of August 2017, sc-hacks is being re-done from scratch.
-Both the library and its API will change in the near future.</p>
+<p>The data is a 2 dimensional array.  It is played as a <code>Pseq</code> along the first dimension.  This results in a stream of rows.  Each subsequent element returned by the stream is a row of data.</p>
+
+<h1 id="different-ways-of-playing-rows">Different ways of playing rows</h1>
+
+<h2 id="playing-each-data-row-as-one-synth">Playing each data row as one Synth</h2>
+
+<h2 id="playing-each-d">Playing each d</h2>
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
+
 
       </div>
     </div>
@@ -829,6 +873,7 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
+                    
                 
                 
                 
@@ -840,6 +885,7 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
+                    
                 
                 
                 
@@ -851,6 +897,9 @@ Both the library and its API will change in the near future.</p>
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -978,8 +1027,10 @@ Both the library and its API will change in the near future.</p>
 
 
         
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/data/" title="Playing with data"> <i class="fa fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/introduction/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/" title="Server objects" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1006,3 +1057,4 @@ Both the library and its API will change in the near future.</p>
 
   </body>
 </html>
+

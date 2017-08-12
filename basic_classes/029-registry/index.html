@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Main :: sc-hacks documentation</title>
+    <title>Registry: Hierarchical Namespaces :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/basic_classes/029-registry/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -468,7 +468,7 @@
 
 
 <li data-nav-id="/basic_classes/" class="dd-item 
-
+parent
 
 
 ">
@@ -476,7 +476,7 @@
     <span>Basic Classes</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -485,7 +485,7 @@
         
          
           <li data-nav-id="/basic_classes/029-registry/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/029-registry/">
             <span>Registry: Hierarchical Namespaces</span> 
@@ -567,25 +567,93 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
         
+          <div id="top-bar">
+            
+
+            <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <span id="sidebar-toggle-span">
+                  <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </span>
+                <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                <span class="links">
+                
+
+
+
+
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/basic_classes/'>Basic Classes</a> > Registry: Hierarchical Namespaces
+
+ 
+
+ 
+
+   
+                </span>
+            </div>
+            <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+          </div>
+        
         
         <div id="body-inner">
+          
+            <h1>Registry: Hierarchical Namespaces</h1>
           
 
 
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
 
- 
-<p>Documentation of sc-hacks library for SuperCollider</p>
+<p>This class uses the <code>Library</code> class to store and  retrieve objects using any array of objects as key.  This extends the way that <code>Pdef</code>, <code>Ndef</code>, <code>OSCdef</code> work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing.  To create this behavior one can then add a method to <code>Symbol</code> for accessing the kind of object needed.  For example: <code>\aSymbol.oscFunc</code> accesses <code>OSCFunc</code> instances. This also allows easier customization of how the object is created if not found.</p>
 
-<p><a href="https://github.com/iani/sc-hacks">https://github.com/iani/sc-hacks</a></p>
+<h1 id="how-it-works">How it works</h1>
 
-<p>As of August 2017, sc-hacks is being re-done from scratch.
-Both the library and its API will change in the near future.</p>
+<p>Store an object in Library under an array of objects (called a <em>path</em>).  When accessing the path, create the object if not already stored, else return the previously stored object.</p>
+
+<h1 id="who-uses-it">Who uses it</h1>
+
+<ul>
+<li><code>SynthPlayer</code> registers its instances in the current environment under their names.</li>
+- 
+<li><code>Function:oscFunc</code> and <code>Symbol:removeOsc</code> registers <code>OSCFuncs</code> under their path names in order to remove existing OSCFunc instances when creating a new one under the same path. </li>
+</ul>
+
+<h1 id="example">Example</h1>
+
+<p>This is the code that makes it possible to create or modify an OSCFunc bound to a symbol.  It defines the methods <code>Function:oscFunc</code> and <code>Symbol:removeOsc</code>.</p>
+
+<pre><code class="language-sclang">
++ Function {
+	oscFunc { | path |
+		path.removeOsc;
+		^Registry ('oscFuncs', path, { OSCFunc (this, path) });
+	}
+}
+
++ Symbol {
+	removeOsc {
+		Registry.doIfFound ('oscFuncs', this, { | found |
+			found.objectClosed;
+			found.free;
+		});	
+	}
+}
+</code></pre>
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
+
 
       </div>
     </div>
@@ -919,16 +987,6 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -940,6 +998,21 @@ Both the library and its API will change in the near future.</p>
             
             
                 
+                    
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -978,8 +1051,10 @@ Both the library and its API will change in the near future.</p>
 
 
         
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/" title="Basic Classes"> <i class="fa fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/introduction/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/030-notification/" title="Notification" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1006,3 +1081,4 @@ Both the library and its API will change in the near future.</p>
 
   </body>
 </html>
+

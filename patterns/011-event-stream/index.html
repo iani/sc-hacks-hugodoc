@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Main :: sc-hacks documentation</title>
+    <title>Modify Patterns while playing :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/patterns/011-event-stream/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -178,7 +178,7 @@
 
 
 <li data-nav-id="/patterns/" class="dd-item 
-
+parent
 
 
 ">
@@ -186,7 +186,7 @@
     <span>Patterns</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -217,7 +217,7 @@
         
          
           <li data-nav-id="/patterns/011-event-stream/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/patterns/011-event-stream/">
             <span>Modify Patterns while playing</span> 
@@ -567,25 +567,82 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
         
+          <div id="top-bar">
+            
+
+            <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <span id="sidebar-toggle-span">
+                  <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </span>
+                <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                <span class="links">
+                
+
+
+
+
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/patterns/'>Patterns</a> > Modify Patterns while playing
+
+ 
+
+ 
+
+   
+                </span>
+            </div>
+            <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+          </div>
+        
         
         <div id="body-inner">
+          
+            <h1>Modify Patterns while playing</h1>
           
 
 
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
 
- 
-<p>Documentation of sc-hacks library for SuperCollider</p>
+<p>An EventStream makes it easy to modify patterns while playing them.</p>
 
-<p><a href="https://github.com/iani/sc-hacks">https://github.com/iani/sc-hacks</a></p>
+<h1 id="how-it-works">How it works</h1>
 
-<p>As of August 2017, sc-hacks is being re-done from scratch.
-Both the library and its API will change in the near future.</p>
+<p>An <code>EventPattern</code> creates <code>EventStreams</code> which are played by <code>EventStreamPlayer</code>.  <code>EventStream</code> stores an event whose values are streams and uses this to produce a new event which is played by EventStreamPlayer.  It is thus possible to modify the event stored in the EventStream while the EventStreamPlayer is playing it.  This makes it easy to modify a playing pattern (which is difficult when using Pbind).</p>
+
+<h1 id="example">Example</h1>
+
+<pre><code>
+() +&gt; \e;
+0.1 +&gt;.dur \e;
+Pseq ((0..20), inf) +&gt;.degree \e;
+Prand ((0..20), inf) +&gt;.degree \e;
+(freq: Pfunc ({ 300 rrand: 1000 }), dur: Prand ([0.1, 0.2], inf)) +&gt; \e;
+(freq: Pfunc ({ 30.rrand(80).midicps }), dur: Pfunc ({ 0.1 exprand: 1 }), legato: Prand ([0.1, 2], inf)) +&gt; \e;
+(degree: Pseq ((0..20), inf), dur: 0.1) +!&gt;.degree \e;
+</code></pre>
+
+<p><strong>Note:</strong></p>
+
+<ul>
+<li><code>+&gt;</code> adds all key-value pairs of an event to the event being played.</li>
+<li><code>+!&gt;</code> replaces the contents of the event being played by the contents of the new event.</li>
+</ul>
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
+
 
       </div>
     </div>
@@ -694,6 +751,21 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
                 
@@ -716,16 +788,6 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -737,6 +799,9 @@ Both the library and its API will change in the near future.</p>
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -978,8 +1043,10 @@ Both the library and its API will change in the near future.</p>
 
 
         
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/patterns/010-events-as-patterns/" title="Playing Events as Patterns"> <i class="fa fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/introduction/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/patterns/012-event-eplay/" title="Patterns updating current environment" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1006,3 +1073,4 @@ Both the library and its API will change in the near future.</p>
 
   </body>
 </html>
+

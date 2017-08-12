@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Main :: sc-hacks documentation</title>
+    <title>Anti-Mythology :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/introduction/002-anti-mythology/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -73,7 +73,7 @@
 
 
 <li data-nav-id="/introduction/" class="dd-item 
-
+parent
 
 
 ">
@@ -81,7 +81,7 @@
     <span>Introduction</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -90,7 +90,7 @@
         
          
           <li data-nav-id="/introduction/002-anti-mythology/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/introduction/002-anti-mythology/">
             <span>Anti-Mythology</span> 
@@ -567,25 +567,75 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
         
+          <div id="top-bar">
+            
+
+            <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <span id="sidebar-toggle-span">
+                  <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </span>
+                <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                <span class="links">
+                
+
+
+
+
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/introduction/'>Introduction</a> > Anti-Mythology
+
+ 
+
+ 
+
+   
+                </span>
+            </div>
+            <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+          </div>
+        
         
         <div id="body-inner">
+          
+            <h1>Anti-Mythology</h1>
           
 
 
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
 
- 
-<p>Documentation of sc-hacks library for SuperCollider</p>
+<p><strong>As of August 2017, sc-hacks is being re-done from scratch.
+Both the library and its API will change in the near future.</strong></p>
 
-<p><a href="https://github.com/iani/sc-hacks">https://github.com/iani/sc-hacks</a></p>
+<p>The purpose of the <em>sc-hacks</em> library is to make experimentation and music making in SuperCollider easier, by offering simpler and shorter coding options for tasks that usually require complex and careful coding. Such are:</p>
 
-<p>As of August 2017, sc-hacks is being re-done from scratch.
-Both the library and its API will change in the near future.</p>
+<ul>
+<li>Replace one synth with another seamlessly while playing</li>
+<li>Freely change the contents of patterns while playing</li>
+<li>Set the parameters of synths either by setting environment variables or through a gui</li>
+<li>Link outputs and inputs of synths and place them in the right order to filter the output of a synth with another synth</li>
+<li>Manage sets of code files to be loaded at startup, and of audio files to be loaded when the server boots</li>
+<li>Map the control signal of synth functions or envelopes to the parameters of a synth.</li>
+</ul>
+
+<h1 id="and-the-caveat-is">And the caveat is ...</h1>
+
+<p><em>sc-hacks</em> is in <strong>permanent alpha</strong>.  As it says in http://semver.org/, <em>"If you’re changing the API every day you should either still be in version 0.y.z or on a separate development branch working on the next major version."</em>.  This library will remain 0.n alpha for a long time, as changes in operator names and syntax are happening constantly.</p>
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
+
 
       </div>
     </div>
@@ -612,8 +662,6 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -626,6 +674,7 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
+                    
                 
                 
                 
@@ -637,6 +686,9 @@ Both the library and its API will change in the near future.</p>
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -978,8 +1030,10 @@ Both the library and its API will change in the near future.</p>
 
 
         
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/introduction/" title="Introduction"> <i class="fa fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/introduction/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/main/" title="Operators and Language Design" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1006,3 +1060,4 @@ Both the library and its API will change in the near future.</p>
 
   </body>
 </html>
+

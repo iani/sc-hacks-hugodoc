@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Main :: sc-hacks documentation</title>
+    <title>Operator Overview :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/main/004-operator-overview/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -109,7 +109,7 @@
 
 
 <li data-nav-id="/main/" class="dd-item 
-
+parent
 
 
 ">
@@ -117,7 +117,7 @@
     <span>Operators and Language Design</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -126,7 +126,7 @@
         
          
           <li data-nav-id="/main/004-operator-overview/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/main/004-operator-overview/">
             <span>Operator Overview</span> 
@@ -567,25 +567,258 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
         
+          <div id="top-bar">
+            
+
+            <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <span id="sidebar-toggle-span">
+                  <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                    <i class="fa fa-bars"></i>
+                  </a>
+                </span>
+                <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+                <span class="links">
+                
+
+
+
+
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/main/'>Operators and Language Design</a> > Operator Overview
+
+ 
+
+ 
+
+   
+                </span>
+            </div>
+            <div class="progress">
+    <div class="wrapper">
+
+    </div>
+</div>
+
+          </div>
+        
         
         <div id="body-inner">
+          
+            <h1>Operator Overview</h1>
           
 
 
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fa fa-bars"></i> navigation</a>
-</span>
 
- 
-<p>Documentation of sc-hacks library for SuperCollider</p>
+<p><em>sc-hacks</em> uses binary operators to shorten and help classify the coding of common operations such as playing a synth or a pattern.  The syntax of a binary operator in SuperCollider is:</p>
 
-<p><a href="https://github.com/iani/sc-hacks">https://github.com/iani/sc-hacks</a></p>
+<pre><code class="language-javascript">
+receiver operator[optional: .adverb] argument
+</code></pre>
 
-<p>As of August 2017, sc-hacks is being re-done from scratch.
-Both the library and its API will change in the near future.</p>
+<p>For example:</p>
+
+<pre><code class="language-javascript">
+// receiver      operator adverb   argument
+{ WhiteNoise.ar(0.1) } +&gt;.newenvir \mysynth
+</code></pre>
+
+<p>Here is a list of operators introduced in <em>sc-hacks</em>.</p>
+
+<h1 id="list-of-operators">List of Operators</h1>
+
+<p>Planned are 4 operators taking functions as argument, 4 operators taking event as argument, and 5 operators taking a symbol as argument. Currently (26 Jun 2017 08:57) the 8 first operators have been tested.</p>
+
+<ol>
+<li><code>{ function } +&gt; synthname </code> play as synth</li>
+<li><code>{ function } *&gt; synthname</code> play as routine (fork)</li>
+<li><code>{ function } **&gt; synthname</code> wrap in loop and play as routine (fork)</li>
+<li><code>{ function } &lt;* key</code> evaluate function whenever value of key is set in envir</li>
+<li><code>( event ) @&gt; patternname</code> play</li>
+<li><code>( event ) @&gt;+ patternname</code> addEvent</li>
+<li><code>( event ) @&gt;! patternname</code> setEvent</li>
+<li><code>( event ) &lt;@ key</code> play next event from EventStream created from event, whenever value of key is set in envir.</li>
+<li><code>receiver &amp;&gt; argument</code> set the output bus of the receiver to the input bus of the argument (only the output bus of the receiver changes)</li>
+<li><code>receiver &lt;&amp; argument</code> set the input bus of the argument to the output bus of the receiver (only the input bus of the argument changes)</li>
+<li><code>receiver &amp;&gt;! argument</code> set the output bus of the receiver to the input bus of the argument, - on a new private bus (both receiver and argument change)</li>
+<li><code>receiver &amp;/&gt; argument</code> Copy the output signal of the receiver from its bus onto the input bus of the argument, using a signal copy synth. (neither receiver nor argument changes).</li>
+<li><code>receiver &lt;/&gt; argument</code> Copy the output signal of the receiver onto a new private bus, and the signal from that private bus onto the input bus of the argument, using 2 signal copy synths (neither receiver nor argument changes).</li>
+</ol>
+
+<h1 id="examples">Examples</h1>
+
+<pre><code class="language-javascript">
+// ================================================================
+// ================ Routines
+//: Start a routine 
+{
+	loop {
+		~freq = 500 rrand: 4000;
+		1.wait;
+	}
+} *&gt; \rout1
+//: replace this with a different routine
+{
+	loop {
+		~freq = 100 rrand: 400;
+		0.2.exprand (0.5).wait;
+	}
+} *&gt; \rout1
+//: Shortcut for loop {}
+{
+	~freq = 50 exprand: 400;
+	0.1.wait;
+} **&gt; \rout1;
+//: stop the routine
+\rout1.routine.stop;
+
+// ================================================================
+// ================ Patterns
+//: start a new pattern
+(dur: 0.1, degree: Pseq ((0..7), inf)) @&gt; \pat1;
+//: replace the pattern running at \pat1 with a new one
+(dur: Pwhite (0.01, 0.1, inf), degree: Pwhite(0, 7, inf)) @&gt; \pat1;
+//: add event's contents to the playing event
+(dur: Pwhite (0.01, 2.1, inf)) @&gt;+ \pat1;
+//: testing function in event key
+// Defer runs the function after the event has played all parameters
+(func1: {{ postf(&quot;freq param is: %\n&quot;, ~freq )}.defer }) @&gt;+ \pat1;
+
+//: ================================================================
+//: ================ More function operators
+//: Testing function in envir
+{ | freq | { SinOsc.ar(freq, 0, EnvGen.kr(Env.perc(0.01, 0.1, 0.1)))}.play } &lt;* \freq;
+
+//: ========== Polyphony: EventStreams triggered by a pattern playing in currentEnvironment
+() @&gt; \pat1;
+// { ~freq.postln; } &lt;* \freq; // just as a test;
+(degree: Pseq((0..7), inf)) &lt;@ \freq;
+//: add another stream on a different label
+(degree: Pseq((0..7).scramble, inf)) &lt;@.label2 \freq;
+//: add another stream on a different label yet
+(degree: Pseq((0..7) + 10, inf), dur: 0.1) &lt;@.label3 \freq;
+//:
+</code></pre>
+
+<h1 id="additional-possible-operators">Additional possible operators</h1>
+
+<p>Draft:</p>
+
+<h2 id="within-the-currentenvironment-nevent">Within the currentEnvironment Nevent</h2>
+
+<p>When one (or any) parameter in the currentEnvironment changes:</p>
+
+<ol>
+<li>Play an event (from an EventPattern / EventStream) <code>&lt;@</code></li>
+<li>Play a synth from a SynthPlayer <code>&lt;+</code></li>
+</ol>
+
+<h2 id="within-an-eventstreamplayer-playing-within-an-nevent-with-event">Within an EventStreamPlayer playing within an Nevent (with Event @>)</h2>
+
+<ul>
+<li>Play an event (from an EventPattern / EventStream)</li>
+<li>Evaluate a function</li>
+</ul>
+
+<h1 id="general-principle-4-types-of-objects-stored-under-names-in-environments">General principle: 4 types of objects stored under names in environments.</h1>
+
+<h1 id="function-play-envir-playername">Function:play: <code>{} +&gt;.envir \playerName</code></h1>
+
+<pre><code class="language-javascript">
+  // Start a synth and store it in \synth1
+  { SinOsc.ar(\freq.kr(400), 0, \amp.kr(0.1)) } +&gt; \synth1;
+  //: Start a routine modifying the freq parameter
+  {
+	  loop {
+		  ~freq = 50 rrand: 100;
+		  5.1.wait;
+	  }
+  } rout: \envir;
+  //: Replace the function playing in \synth1
+  { Ringz.ar (WhiteNoise.ar (\amp.kr (0.1)), \freq.kr (400)) } +&gt; \synth1;
+  //: Start a synth in a different environment
+  { LFSaw.ar(\freq.kr(400), 0, \amp.kr(0.1)) } +&gt;.envir2 \synth1;
+  //: Start a routine modifying the freq parameter in the second environment
+  {
+	  loop {
+		  ~freq = 400 rrand: 4000;
+		  0.1.wait;
+	  }
+  } rout: \envir2;
+  //: Test the contents of the library
+  Library.global.dictionary;
+</code></pre>
+
+<h1 id="accessing-synthplayers-eventpatterns-eventstreamplayers-routines-and-windows">Accessing SynthPlayers, EventPatterns/EventStreamPlayers, Routines and Windows</h1>
+
+<p>The following messages are used to access a SynthPlayer, EventStreamPlayer, Routine or Window stored under a name in an environment.  If no enviroment is specified, then the currentEnvironment is used.</p>
+
+<ul>
+<li><code>symbol.synth(optional: envir)</code></li>
+<li><code>symbol.pattern(optional: envir)</code></li>
+<li><code>symbol.routine(optional: envir)</code></li>
+<li><code>symbol.window(optional: envir)</code></li>
+</ul>
+
+<p>Additionally, the following introspection methods are provided:</p>
+
+<ul>
+<li><code>Nevent:envirs</code> : Dictionary with all Nenvirs stored in Library under <code>\environments</code></li>
+<li><code>Registry;envirs</code> : Synonym of <code>Nevent:envirs</code></li>
+<li><code>\envirName.synths</code> : All synth players of Nenvir named <code>\envirName</code>.</li>
+<li><code>\envirName.patterns</code> : All EventStreamPlayers of Nenvir named <code>\envirName</code>.</li>
+<li><code>\envirName.routines</code> : All Routines of Nenvir named <code>\envirName</code>.</li>
+<li><code>\envirName.windows</code> : All windows of Nenvir named <code>\envirName</code>.</li>
+</ul>
+
+<h2 id="method-implementation-code">Method implementation code</h2>
+
+<p>The code implementing these methods for <code>Symbol</code> in <code>Nevent.sc</code> is:</p>
+
+<pre><code class="language-javascript">
+ // Return nil if no element found.
+  // Also, do not push the environment if created.
+  synth { | envir |
+	  ^Registry.at (envir.asEnvironment (false), \synths, this);
+  }
+
+  pattern { | envir |
+	  ^Registry.at (envir.asEnvironment (false), \patterns, this);
+  }
+
+  routine { | envir |
+	  ^Registry.at (envir.asEnvironment (false), \routines, this);
+  }
+
+  window { | envir, rect |
+	  // always construct new window, and push the environment
+	  ^Registry (envir.asEnvironment, \windows, this, {
+		  Window (this, rect)
+		  .onClose_ ({ | me | me.objectClosed; });
+	  })
+  }
+</code></pre>
+
+<h2 id="tests">Tests</h2>
+
+<pre><code class="language-javascript">
+//: explicitly push \envir as currentEnvironment (only for clarity).
+\envir.push;
+//: Initially, no synth is available:
+\envir.synths;
+//: Also no synth is available in 
+//: Play a function in envir: 
+{ PinkNoise.ar(0.2) } +&gt;.envir \test;
+</code></pre>
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
+
 
       </div>
     </div>
@@ -638,16 +871,6 @@ Both the library and its API will change in the near future.</p>
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -659,6 +882,21 @@ Both the library and its API will change in the near future.</p>
             
             
                 
+                    
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -978,8 +1216,10 @@ Both the library and its API will change in the near future.</p>
 
 
         
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/main/" title="Operators and Language Design"> <i class="fa fa-chevron-left"></i></a>
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/introduction/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+        
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/main/005-mini-language-overview/" title="Mini-Language Overview" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1006,3 +1246,4 @@ Both the library and its API will change in the near future.</p>
 
   </body>
 </html>
+
