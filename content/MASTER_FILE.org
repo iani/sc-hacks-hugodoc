@@ -26,7 +26,7 @@ The purpose of the /sc-hacks/ library is to make experimentation and music makin
 - Manage sets of code files to be loaded at startup, and of audio files to be loaded when the server boots
 - Map the control signal of synth functions or envelopes to the parameters of a synth.
 
-*** And the caveat is ...
+*** Caveat
 
 /sc-hacks/ is in *permanent alpha*.  As it says in http://semver.org/, /"If you’re changing the API every day you should either still be in version 0.y.z or on a separate development branch working on the next major version."/.  This library will remain 0.n alpha for a long time, as changes in operator names and syntax are happening constantly.
 
