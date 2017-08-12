@@ -3,7 +3,8 @@ title = "History"
 weight = 3
 +++
 
-/sc-hacks/ was motivated by the need to improve some aspects [[http://doc.sccode.org/Overviews/JITLib.html][JITLib]], such as:
+Initially, /sc-hacks/ was motivated by the need to improve some aspects [[http://doc.sccode.org/Overviews/JITLib.html][JITLib]], such as:
+
 - The use of signal-copying synths to audio busses for linking i/o between synths.
 - The modification of patterns while they are being played with Pbind.
 
