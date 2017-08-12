@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Basic Classes :: sc-hacks documentation</title>
+    <title>Mini-Language Overview :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/basic_classes/">
+  <body class="" data-url="/main/007-mini-language-overview/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -131,7 +131,7 @@
 
 
 <li data-nav-id="/main/" class="dd-item 
-
+parent
 
 
 ">
@@ -139,7 +139,7 @@
     <span>Operators and Language Design</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -159,7 +159,7 @@
         
          
           <li data-nav-id="/main/007-mini-language-overview/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/main/007-mini-language-overview/">
             <span>Mini-Language Overview</span> 
@@ -490,15 +490,15 @@
 
 
 <li data-nav-id="/basic_classes/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/">
     <span>Basic Classes</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -605,7 +605,12 @@ active
 
 
 
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > Basic Classes
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/main/'>Operators and Language Design</a> > Mini-Language Overview
+
+ 
 
  
 
@@ -623,83 +628,109 @@ active
         
         <div id="body-inner">
           
-            <h1>Basic Classes</h1>
+            <h1>Mini-Language Overview</h1>
           
 
 
 
 
+<p>The classes, methods and operators provided by <em>sc-hacks</em> extend SuperCollider to simplify the coding of GUI and of sound / musical structure / interaction.  They are designed in the sense of a very small language.  Here is a summary.</p>
+
+<h1 id="items-connected-to-currentenvironment-gui-synths-patterns-routines">Items connected to currentEnvironment: GUI, Synths, Patterns, Routines</h1>
+
+<h1 id="operator-and-message-overview">Operator and message overview</h1>
+
+<p><strong>This is a draft: Implementation of the following operators has just started.</strong> <em>The purpose of the overview is to guide coding by keeping the different versions discrete and consistent.</em></p>
+
+<h2 id="operators-on-functions">Operators on Functions</h2>
+
+<p>These are operators that are written after a function, and thus take a function as receiver.  They serve two main uses of functions in musical processes:</p>
+
+<ol>
+<li>Play a synth (<code>Function:play</code> : operator <code>+&gt;</code>)</li>
+<li>Play a routine (<code>Function:fork</code> : operator <code>*&gt;</code>)</li>
+</ol>
+
+<p>+> play as synth</p>
+
+<p>*> play as routine (fork)</p>
+
+<h2 id="operators-on-events">Operators on Events</h2>
+
+<p>These are operators that are written after an event, and thus take an event as receiver.  They serve to play the event as EventPattern inside currentEnvironment, setting the environments keys (but not producing any sound by itself).  Furthermore, they serve to modify the event of such a playing EventPattern.</p>
+
+<p>@> play</p>
+
+<p>@>+ addEvent</p>
+
+<p>@>! setEvent</p>
+
+<p>@>@ addKey</p>
+
+<h2 id="operators-on-symbols">Operators on Symbols</h2>
+
+<p>These are operators that are written after a symbol, and thus take a symbol as receiver. They are primarily used to link synths by setting the <code>out</code> and <code>in</code> environment variables in Nenvir instances to a common bus.</p>
+
+<dl>
+<dt><code>&amp;&gt;</code></dt>
+<dd>set the output bus of the receiver to the input bus of the argument (only the output bus of the receiver changes)</dd>
+<dt><code>&lt;&amp;</code></dt>
+<dd>set the input bus of the argument to the output bus of the receiver (only the input bus of the argument changes)</dd>
+</dl>
+
+<pre><code class="language-javascript">
+receiver &amp;&gt;! argument
+</code></pre>
+
+<dl>
+<dt><code>&amp;&gt;!</code></dt>
+<dd>set the output bus of the receiver to the input bus of the argument, on a new private bus (both receiver and argument change)</dd>
+</dl>
+
+<pre><code class="language-javascript">
+receiver &amp;/&gt; argument
+</code></pre>
+
+<dl>
+<dt><code>&amp;/&gt;</code></dt>
+<dd>Copy the output signal of the receiver from its bus onto the input bus of the argument, using a signal copy synth.</dd>
+</dl>
+
+<pre><code class="language-javascript">
+receiver &lt;/&gt; argument
+</code></pre>
+
+<dl>
+<dt><code>&lt;/&gt;</code></dt>
+<dd>Copy the output signal of the receiver onto a new private bus, and the signal from that private bus onto the input bus of the argument, using 2 signal copy synths.</dd>
+</dl>
+
+<h2 id="messages-to-symbols">Messages to symbols</h2>
+
+<p>splay</p>
+
+<p>eplay</p>
+
+<p>rplay</p>
+
+<h2 id="operators-on-strings">Operators on strings (!?)</h2>
+
+<p>string +> symbol : play synthdef named by string on the symbol as SynthPlayer ?</p>
+
+<h1 id="playing-synths">Playing Synths</h1>
+
+<h1 id="playing-routines">Playing Routines</h1>
+
+<h1 id="playing-patterns-with-default-note-events">Playing patterns with default note events</h1>
+
+<h1 id="playing-patterns-in-currentenvironment">Playing patterns in currentEnvironment</h1>
+
+<h1 id="creating-guis">Creating GUIs</h1>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">Registry: Hierarchical Namespaces</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">Notification</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -776,16 +807,6 @@ active
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -798,16 +819,8 @@ active
             
                 
                     
-                
-                
-                
-            
-        
-                    
                         
-            
-            
-                
+                        
                     
                 
                 
@@ -820,17 +833,6 @@ active
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
                     
                 
                 
@@ -843,129 +845,8 @@ active
             
                 
                     
-                
-                
-                
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
                     
                 
                 
@@ -1040,6 +921,29 @@ active
             
         
                     
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
                         
             
             
@@ -1057,6 +961,16 @@ active
             
                 
                     
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1069,8 +983,129 @@ active
             
                 
                     
+                
+                
+                
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1120,10 +1155,10 @@ active
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/" title="Buffers"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/main/006-operator-overview/" title="Operator Overview"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/" title="Registry: Hierarchical Namespaces" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/main/008-improving_eplay/" title="Improving Function:eplay" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1150,3 +1185,4 @@ active
 
   </body>
 </html>
+

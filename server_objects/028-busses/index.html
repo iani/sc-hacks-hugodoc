@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Basic Classes :: sc-hacks documentation</title>
+    <title>Busses :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/basic_classes/">
+  <body class="" data-url="/server_objects/028-busses/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -410,7 +410,7 @@
 
 
 <li data-nav-id="/server_objects/" class="dd-item 
-
+parent
 
 
 ">
@@ -418,7 +418,7 @@
     <span>Server objects</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -460,7 +460,7 @@
         
          
           <li data-nav-id="/server_objects/028-busses/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/server_objects/028-busses/">
             <span>Busses</span> 
@@ -490,15 +490,15 @@
 
 
 <li data-nav-id="/basic_classes/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/">
     <span>Basic Classes</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -605,7 +605,12 @@ active
 
 
 
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > Basic Classes
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/server_objects/'>Server objects</a> > Busses
+
+ 
 
  
 
@@ -623,83 +628,20 @@ active
         
         <div id="body-inner">
           
-            <h1>Basic Classes</h1>
+            <h1>Busses</h1>
           
 
 
 
 
+<h1 id="bus-allocation">Bus Allocation</h1>
+
+<h1 id="bus-index-parameter-updates">Bus Index Parameter Updates</h1>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">Registry: Hierarchical Namespaces</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">Notification</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -990,6 +932,21 @@ active
             
                 
                     
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
                 
                 
                 
@@ -1023,40 +980,6 @@ active
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
                     
                 
                 
@@ -1071,6 +994,29 @@ active
                     
                         
                         
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1120,10 +1066,10 @@ active
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/" title="Buffers"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/027-target-group/" title="Target Group"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/" title="Registry: Hierarchical Namespaces" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/" title="Buffers" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1150,3 +1096,4 @@ active
 
   </body>
 </html>
+

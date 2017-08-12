@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Basic Classes :: sc-hacks documentation</title>
+    <title>Triggering EnvGen and Line :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/basic_classes/">
+  <body class="" data-url="/buffers_and_grains/020-triggering-envgen/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -316,7 +316,7 @@
 
 
 <li data-nav-id="/buffers_and_grains/" class="dd-item 
-
+parent
 
 
 ">
@@ -324,7 +324,7 @@
     <span>Playing buffers and grains</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -344,7 +344,7 @@
         
          
           <li data-nav-id="/buffers_and_grains/020-triggering-envgen/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/020-triggering-envgen/">
             <span>Triggering EnvGen and Line</span> 
@@ -490,15 +490,15 @@
 
 
 <li data-nav-id="/basic_classes/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/">
     <span>Basic Classes</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -605,7 +605,12 @@ active
 
 
 
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > Basic Classes
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/'>Playing buffers and grains</a> > Triggering EnvGen and Line
+
+ 
 
  
 
@@ -623,83 +628,149 @@ active
         
         <div id="body-inner">
           
-            <h1>Basic Classes</h1>
+            <h1>Triggering EnvGen and Line</h1>
           
 
 
 
 
+<p>Besides controlling the amplitude shape of a single sound-event or note in its entirety, envelopes can also be used to generate streams of sound events with the same synth.  The same technique can also be applied to Line or Xline to arbitrarily construct shapes controlling any parameter on the fly.  Here are some examples explaining how to do this using either just the default <strong>SCClassLibrary</strong> and the <strong>sc-hacks</strong> library.</p>
+
+<ol>
+Two items are necessary to re-trigger envelope or line-segment UGens in a Synth:
+<li>The <code>doneAction</code> argument of the UGen in question must have a value of 0 in order to keep the Synth alive afer the UGen has finished playing.</li>
+<li>The UGen in question must use a control in its <code>gate</code> argument. The UGen restarts whenever the value of the <code>gate</code> control changes from 0 to 1.  Furthermore, if the Envelope contains a release part, then the release part will be triggered when the <code>gate</code> control changes from 1 to 0.</li>
+</ol>
+
+<h1 id="caution-use-a-name-other-than-gate-as-control-name-for-triggering">Caution: Use a name other than <code>gate</code> as control name for triggering</h1>
+
+<p>*NOTE: The control used to trigger the EnvGen <em>must have a name different than</em> <code>gate</code>, otherwise SC will be unable to release the synth because it creates a second <code>gate</code> control by default when creating synthdefs from functions.  For example:</p>
+
+<pre><code class="language-sclang">
+  //: This is wrong:
+  a =  { | freq = 400, gate = 0 |
+	  var env;
+	  env = Env.adsr ();
+	  SinOsc.ar (freq, 0, 0.1)
+	  ,* EnvGen.kr (env, gate: gate, doneAction: 0)
+  }.play;
+  NodeWatcher.register (a); // register a to update state when it ends
+  //: Test if a is playing
+  a.isPlaying;
+  // first let it make a sound:
+  a.set (\gate, 1);
+  //: then try to release it:
+  a.release;
+  //: The output amplitude is 0 but the synth is still playing:
+  a.isPlaying;
+  //: Try again, specifying a release time:
+  a.release (0.1);
+  //: To really stop the synth, you have to free it
+  a.free;
+  //: The synth has stopped playing. Synth count should be 0 in the server display
+  a.isPlaying; // returns false
+</code></pre>
+
+<h1 id="function-play-and-synth-set-scclasslibrary">Function play and Synth set (SCClassLibrary)</h1>
+
+<p>Here is a simple example using only the standard SCClassLibrary:</p>
+
+<pre><code class="language-sclang">
+  //: Start a triggerable synth and store it in variable a
+  // Note: The EnvGen will not be triggered because trig is 0.
+  // Thus the synth will not produce an audible signal.
+
+  // use trig instead of gate as control name!
+  a = { | freq = 400, trig = 0 |
+	  var env;
+	  env = Env.adsr ();
+	  SinOsc.ar (freq, 0, 0.1)
+	  ,* EnvGen.kr (env, gate: trig, doneAction: 0)
+  }.play;
+  //: Trigger the envelope
+  a.set (\trig, 1);
+  //: Release the envelope
+  a.set (\trig, 0);
+  //: Re-trigger the nevelope
+  a.set (\trig, 1);
+  //: Release the envelope again
+  a.set (\trig, 0);
+  //: Run a routine to start and stop the synth several times
+  {
+	  10 do: { | i |
+		  a.set (\trig, (i + 1) % 2); // i+1 : start with trigger on
+		  0.01.exprand (0.5).wait;
+	  }
+  }.fork;
+  //: Do the same as above, but also change the frequency
+  {
+	  40 do: { | i |
+		  // only change frequency when starting, not when releasing:
+		  if (i + 1 % 2 &gt; 0) { // i / 2: wholetone -&gt; chromatic
+			  a.set (\freq, (i / 2 + 60).midicps, \trig, 1);			
+		  }{
+			  a.set (\trig, 0);
+		  };
+		  0.01.exprand (0.5).wait;
+	  };
+  }.fork;
+  //:
+
+</code></pre>
+
+<h1 id="control-through-environment-variables-using-function">Control through environment variables, using Function <code>+&gt;</code></h1>
+
+<p>In <em>sc-hacks</em>, the operator <code>+&gt;</code> plays a function and stores its synth in the global Library using a <code>SynthPlayer</code> instance.  Additionally, it makes the synth react whenever an environment variable whose name corresponds to a control parameter of the synth is set in the <code>currentEnvironment</code>.  This makes it easy to control the synth through the environment.</p>
+
+<pre><code class="language-sclang">
+  { | freq = 400, trig = 0 |
+	  var env;
+	  env = Env.adsr ();
+	  SinOsc.ar (freq, 0, 0.1)
+	  ,* EnvGen.kr (env, gate: trig, doneAction: 0)
+  } +&gt; \test;
+  //:
+  ~trig = 1;
+  //:
+  ~trig = 0;
+  //:
+  {
+	  var trig;
+	  inf do: { | i |
+		  trig = i + 1 % 2;
+		  if (trig &gt; 0) { ~freq = 300 rrand: 3000 };
+		  ~trig = trig;
+		  0.9.rand.wait;
+	  };
+  }.rout;
+  // rout starts a routine like fork, and stores it in the library
+  // under a name (default: 'routine')
+  // Additionally, if a routine is running under the same name,
+  // it stops that routine before starting the new one to replace it.
+  //:
+  {
+	  var trig;
+	  26 do: { | i |
+		  trig = i + 1 % 2;
+		  if (trig &gt; 0) { ~freq = (i / 2 + 60).midicps };
+		  ~trig = trig;
+		  0.24.wait;
+	  };
+  }.rout;
+  //:
+  {
+	  20 do: { | i |
+		  ~trig = i + 1 % 2;
+		  ~freq = 300 rrand: 3000;
+		  0.9.rand.wait;
+	  }
+  }.rout;
+</code></pre>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">Registry: Hierarchical Namespaces</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">Notification</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -922,6 +993,82 @@ active
             
                 
                     
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
                 
                 
                 
@@ -961,74 +1108,6 @@ active
             
         
                     
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
                         
             
             
@@ -1057,7 +1136,6 @@ active
             
                 
                     
-                    
                 
                 
                 
@@ -1068,9 +1146,6 @@ active
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1120,10 +1195,10 @@ active
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/" title="Buffers"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/019-triggering-methods/" title="Triggering Methods"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/" title="Registry: Hierarchical Namespaces" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/021-playing-grains/" title="Playing Grains" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1150,3 +1225,4 @@ active
 
   </body>
 </html>
+

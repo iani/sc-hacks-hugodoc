@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Basic Classes :: sc-hacks documentation</title>
+    <title>Improving Function:eplay :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/basic_classes/">
+  <body class="" data-url="/main/008-improving_eplay/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -131,7 +131,7 @@
 
 
 <li data-nav-id="/main/" class="dd-item 
-
+parent
 
 
 ">
@@ -139,7 +139,7 @@
     <span>Operators and Language Design</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -170,7 +170,7 @@
         
          
           <li data-nav-id="/main/008-improving_eplay/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/main/008-improving_eplay/">
             <span>Improving Function:eplay</span> 
@@ -490,15 +490,15 @@
 
 
 <li data-nav-id="/basic_classes/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/">
     <span>Basic Classes</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -605,7 +605,12 @@ active
 
 
 
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > Basic Classes
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/main/'>Operators and Language Design</a> > Improving Function:eplay
+
+ 
 
  
 
@@ -623,83 +628,91 @@ active
         
         <div id="body-inner">
           
-            <h1>Basic Classes</h1>
+            <h1>Improving Function:eplay</h1>
           
 
 
 
 
+<p>Individual improvement steps for Function:eplay: Done and TODO.  Thesse notes are from an early stage in development.  Now the functionality of most done steps has been integrated in class <code>SynthPlayer</code>.</p>
+
+<h1 id="done-11-jun-2017-21-48">Done (11 Jun 2017 21:48)</h1>
+
+<ul>
+<li>Store the resulting synth in envir under <code>[\synths, synthName]</code> (default for <code>synthName=: =synth</code>).</li>
+<li>If previous synth exists under <code>[\synths, synthName]</code> path, then free/release it.</li>
+<li>When a synth ends, remove it from its path in envir.</li>
+<li>Make sure that when a synth <code>previousSynth</code> is released by replacing it through a new synth created through <code>Function:eplay</code>, the <code>previousSynth</code> ending does not remove the new synth that has already been stored in the same path.</li>
+<li>Notification actions for updates from enviroment variable changes are added when the Synth starts (not when the <code>Function:play</code> message is sent). This way, there are no more errors "Node not found" when changing the environment before the synth has started.</li>
+</ul>
+
+<h1 id="done-19-jun-2017-10-52">Done (19 Jun 2017 10:52):</h1>
+
+<h2 id="synth-start-stop-release-and-set-control-from-event-eplay-eventpatterns">Synth start-stop (release) and set control from Event:eplay (EventPatterns)</h2>
+
+<p>The following will add some complexity to the current scheme and may therefore be added later on only.</p>
+
+<ul>
+<li>Define <code>SynthPlayer</code> to add synth start-stop capabilities to <code>Function:eplay</code></li>
+<li>Add synths instance variable to Nevent for faster access to SynthPlayers</li>
+</ul>
+
+<p>In addition to listening for changes from the <code>currentEnvironment</code>, a second notification mechanism should be added to Function:eplay, to enable creating new synths, releasing or freeing this synth when playing EventPatterns with an <code>EventStreamPlayer</code>.  A simple way to do this is by a stream which generates the commands to be played.  The stream is stored in a key with the same name as the synth to be controlled.  Function:eplay or SynthPlayer:play adds the environment as notifier to the synth with the synth's name as message and a switch statement which choses the action to be performed depending on the value that was sent in addition to the key (message) by the changed message. A draft for this code has been added now to Function:eplay:</p>
+
+<pre><code class="language-javascript">
+  synth.onStart (this, {| myself |
+	  // &quot;Synth started, so I add notifiers for updates&quot;.postln;
+	  argNames do: { | param |
+		  synth.addNotifier (envir, param, { | val |
+			  synth.set (param, val);
+		  });
+		  // Experimental: 
+		  synth.addNotifier (envir, name, { | command |
+			  //	command.postln;
+			  switch (command,
+				  \stop, {
+					  synth.objectClosed;
+					  synth.release (envir [\releaseTime] ? 0.02);
+				  },
+				  { postf (&quot;the command was: %\n&quot;, command)}
+			  )
+		  })
+	  };
+  });
+</code></pre>
+
+<h1 id="still-todo-19-jun-2017-10-52">Still TODO (19 Jun 2017 10:52)</h1>
+
+<h2 id="synth-start-stop-notifications-for-gui-and-other-listeners">Synth start-stop notifications for GUI and other listeners</h2>
+
+<ul>
+<li>When a new synth starts or when an old synth is removed, it should emit notifications so that GUIS that depend on it update their status.  Such guis may be:</li>
+<li>Start-stop buttons</li>
+<li>Guis with widgets for controlling the synths parameters.  When a new synth starts, then the old gui should be replaced with a new one with widgets corresponding to the new synth's control parameters.</li>
+  Note: Possibly the notification should be emitted from the =\synthName= under which the synth is stored.  The messages may be:
+<li><code>\started</code></li>
+<li><code>\stopped</code></li>
+<li><code>\replaced</code></li>
+    The above is subject to testing. 
+</ul>
+
+<h1 id="notes">Notes</h1>
+
+<ul>
+<li>When this is done, it should be possible to create multiple gui windows for multiple synths running in the same environment. However, parameters under the same name will control the parameters under that name for all synths in that environment.</li>
+<li>To develop the right code for this, do it with a plain function, adding the functionalities one-by-one.</li>
+</ul>
+
+<h1 id="current-function-eplay-method-code">Current <code>Function:eplay</code> method code</h1>
+
+<h1 id="drafts">Drafts</h1>
+
+<p>See <a href="https://github.com/iani/sc-hacks/blob/master/LabCode/rebuildFunctionEplay.scd" title="https://github.com/iani/sc-hacks/blob/master/LabCode/rebuildFunctionEplay.scd">https://github.com/iani/sc-hacks/blob/master/LabCode/rebuildFunctionEplay.scd</a> for draft used to build this functionality in <code>SynthPlayer</code></p>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">Registry: Hierarchical Namespaces</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">Notification</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -776,6 +789,70 @@ active
             
                 
                     
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
                 
                 
                 
@@ -860,62 +937,6 @@ active
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
                 
                     
             
@@ -1057,7 +1078,6 @@ active
             
                 
                     
-                    
                 
                 
                 
@@ -1068,9 +1088,6 @@ active
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1120,10 +1137,10 @@ active
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/" title="Buffers"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/main/007-mini-language-overview/" title="Mini-Language Overview"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/" title="Registry: Hierarchical Namespaces" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/main/009-function-eplay/" title="Play a function in the environment" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1150,3 +1167,4 @@ active
 
   </body>
 </html>
+

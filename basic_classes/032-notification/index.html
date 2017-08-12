@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Basic Classes :: sc-hacks documentation</title>
+    <title>Notification :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/basic_classes/">
+  <body class="" data-url="/basic_classes/032-notification/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -491,7 +491,7 @@
 
 <li data-nav-id="/basic_classes/" class="dd-item 
 parent
-active
+
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/">
@@ -518,7 +518,7 @@ active
         
          
           <li data-nav-id="/basic_classes/032-notification/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">
             <span>Notification</span> 
@@ -605,7 +605,12 @@ active
 
 
 
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > Basic Classes
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/basic_classes/'>Basic Classes</a> > Notification
+
+ 
 
  
 
@@ -623,83 +628,72 @@ active
         
         <div id="body-inner">
           
-            <h1>Basic Classes</h1>
+            <h1>Notification</h1>
           
 
 
 
 
+<p>Notification: Register a function callback to a message and a pair of objects
+=Notification= is an improved version of the <a href="http://doc.sccode.org/Classes/NotificationCenter.html" title="NotificationCenter class">NotificationCenter class</a>.  This class enables objects to register a function which is called when another object changes according to some aspect.  The aspect is expressed by a symbol.  To trigger a notification action, one sends the message <code>changed</code> to an object together with a symbol expressing the aspect which changed.  The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol.  This allows detailed control of callback execution amongst objects of the system.  For example, one can tell a gui object to change its color to green when a synth starts, and to change its color to red when that synth stops.</p>
+
+<ul>
+=Notification= adds the following enhancements: 
+<li>Ability to remove existing notification connections reliably.</li>
+<li>Several methods for easily adding or modifying connections between objects.</li>
+<li>Ability to remove all connections from an object with a single message, <code>objectClosed</code>, and also to execute additional actions when that object closes.  Closing here means that the object is freed and will no longer be used by the system.</li>
+</ul>
+
+<h1 id="examples">Examples</h1>
+
+<h2 id="onobjectclosed"><code>onObjectClosed</code></h2>
+
+<p><code>Registry</code> uses <code>onObjectClosed</code> to remove objects by sending them that message:</p>
+
+<pre><code class="language-sclang">
+   *new { | ... pathAndFunc |
+		var path, makeFunc, instance;
+		makeFunc = pathAndFunc.last;
+		path = pathAndFunc[0..pathAndFunc.size-2];
+		instance = Library.global.atPath(path);
+		if (instance.isNil) {
+			instance = makeFunc.value;
+			Library.global.putAtPath(path, instance);
+			instance.onObjectClosed(this, {
+				this.remove(*path)
+			});
+		};
+		^instance;
+  }
+</code></pre>
+
+<h2 id="addnotifieroneshot"><code>addNotifierOneShot</code></h2>
+
+<p>This is in turn used by <code>oscFunc</code> and <code>rout</code> methods for removing <code>OSCFunc</code> and <code>Routine</code> objects in order to replace them with new instances.</p>
+
+<p>The <code>addNotifierOneShot</code> method executes the registered Function just once. This is useful when it is clear that only one call is required. For example, the <code>onEnd</code> and <code>onStart</code> methods for <code>Node</code> make use of the <code>addNotifierOneShot</code> method:</p>
+
+<pre><code class="language-sclang">
++ Node {
+	onStart { | listener, action |
+		NodeWatcher.register(this);
+		listener.addNotifierOneShot(this, \n_go, action);
+	}
+
+	onEnd { | listener, action |
+		NodeWatcher.register(this);
+		//		this.isPlaying = true; // dangerous
+		listener.addNotifierOneShot(this, \n_end, action);
+	}
+}
+</code></pre>
+
+<p>Similar extensions can be built for whatever object needs to monitor the closing or end of an object such as closing of a Window or stopping of a Pattern.</p>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">Registry: Hierarchical Namespaces</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">Notification</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -1083,6 +1077,7 @@ active
             
                 
                     
+                    
                 
                 
                 
@@ -1094,6 +1089,9 @@ active
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1120,10 +1118,10 @@ active
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/" title="Buffers"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/" title="Registry: Hierarchical Namespaces"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/" title="Registry: Hierarchical Namespaces" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/use_examples/" title="Use examples" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1150,3 +1148,4 @@ active
 
   </body>
 </html>
+

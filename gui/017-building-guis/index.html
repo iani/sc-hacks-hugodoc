@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>Basic Classes :: sc-hacks documentation</title>
+    <title>Building GUIs :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/basic_classes/">
+  <body class="" data-url="/gui/017-building-guis/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -269,7 +269,7 @@
 
 
 <li data-nav-id="/gui/" class="dd-item 
-
+parent
 
 
 ">
@@ -277,7 +277,7 @@
     <span>GUI</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -297,7 +297,7 @@
         
          
           <li data-nav-id="/gui/017-building-guis/" class="dd-item
-         
+         active
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/gui/017-building-guis/">
             <span>Building GUIs</span> 
@@ -490,15 +490,15 @@
 
 
 <li data-nav-id="/basic_classes/" class="dd-item 
-parent
-active
+
+
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/">
     <span>Basic Classes</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -605,7 +605,12 @@ active
 
 
 
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > Basic Classes
+
+
+
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/gui/'>GUI</a> > Building GUIs
+
+ 
 
  
 
@@ -623,83 +628,183 @@ active
         
         <div id="body-inner">
           
-            <h1>Basic Classes</h1>
+            <h1>Building GUIs</h1>
           
 
 
 
 
+<p>This notebook shows how to build GUIs starting from scratch, with minimal code and in small steps.</p>
+
+<h1 id="just-a-window">Just a window</h1>
+
+<pre><code class="language-javascript">
+//: 1 Just a window
+Window (&quot;window name&quot;).front;
+</code></pre>
+
+<h1 id="add-a-slider-and-resize">Add a slider and resize.</h1>
+
+<p>Use VLayout for automatic resizing.</p>
+
+<pre><code class="language-javascript">
+
+Window (&quot;window name&quot;)
+.view.layout_ (
+	VLayout (
+		Slider ()
+	)
+).front;
+//: Make the slider horizontal.
+Window (&quot;window name&quot;)
+.view.layout_ (
+	VLayout (
+		Slider ()
+		.orientation_ (\horizontal)
+	)
+).front;
+</code></pre>
+
+<h1 id="add-more-sliders">Add more sliders</h1>
+
+<p>Use a function to avoid repeating spec code!
+Make the orientation an argument to enable customization.</p>
+
+<pre><code class="language-javascript">
+var makeSlider;
+
+makeSlider = { | orientation = \horizontal |
+	Slider ()
+		.orientation_ (orientation)
+};
+
+Window (&quot;window name&quot;)
+.view.layout_ (
+	VLayout (
+		*({makeSlider.([\horizontal, \vertical].choose)} ! 10)
+	)
+).front;
+
+</code></pre>
+
+<h1 id="add-more-arguments-for-controlspec-label-and-action">Add more arguments for controlSpec, label, and action</h1>
+
+<pre><code class="language-javascript">
+
+var makeSlider;
+
+makeSlider = { | label = &quot;slider&quot;, min = 0, max = 10, step = 0, default = 0.5, orientation = \horizontal,
+	action |
+	var controlSpec;
+	controlSpec = [min, max, \lin, step, default].asSpec;
+	// provide default action if needed:
+	action ?? {
+		action = { | value | controlSpec.map (value).postln }
+	};
+	HLayout (
+		StaticText ().string_ (label),
+		Slider ()
+		.action_ ({ | me | action.(me.value)})
+		.orientation_ (orientation)
+	)
+};
+
+Window (&quot;window name&quot;)
+.view.layout_ (
+	VLayout (
+		*({makeSlider.([\horizontal, \vertical].choose)} ! 10)
+	)
+).front;
+
+</code></pre>
+
+<h1 id="add-number-box-after-the-slider">Add number box, after the slider.</h1>
+
+<pre><code class="language-javascript">
+
+var makeSlider;
+
+makeSlider = { | label = &quot;slider&quot;, min = 0, max = 10, step = 0, default = 0.5, orientation = \horizontal,
+	action |
+	var controlSpec;
+	controlSpec = [min, max, \lin, step, default].asSpec;
+	// provide default action if needed:
+	action ?? {
+		action = { | value | controlSpec.map (value).postln }
+	};
+	HLayout (
+		StaticText ().string_ (label),
+		Slider ()
+		.action_ ({ | me | action.(me.value)})
+		.orientation_ (orientation),
+		NumberBox ())
+};
+
+Window (&quot;window name&quot;)
+.view.layout_ (
+	VLayout (
+		*({makeSlider.(
+			max: 0.0.rrand (20.0),
+			orientation: [\horizontal, \vertical].choose)} ! 10)
+	)
+).front;
+
+
+</code></pre>
+
+<h1 id="add-value-update-for-number-box-and-slider">Add value update for number box and slider</h1>
+
+<pre><code>
+
+var makeSlider;
+
+makeSlider = { | label = &quot;slider&quot;, min = 0, max = 10, step = 0, default = 0.5, orientation = \horizontal,
+	action |
+	var controlSpec, mappedVal, slider, numberBox;
+	controlSpec = [min, max, \lin, step, default].asSpec;
+	// provide default action if needed:
+	action ?? {
+		action = { | value | value.postln }
+	};
+	HLayout (
+		StaticText ().string_ (label),
+		slider = Slider ()
+		.action_ ({ | me |
+			mappedVal = controlSpec.map (me.value);
+			numberBox.value = mappedVal;
+			action.(mappedVal)})
+		.orientation_ (orientation),
+		numberBox = NumberBox ()
+		.action_ ({ | me |
+			mappedVal = me.value;
+			slider.value = controlSpec.unmap (mappedVal);
+			action.(mappedVal)
+		})
+	)
+};
+
+Window (&quot;window name&quot;)
+.view.layout_ (
+	VLayout (
+		*({ | i |
+			makeSlider.(format (&quot;slider %&quot;, i),
+				max: 0.0.rrand (20.0),
+				orientation: [\horizontal, \vertical].choose)
+		} ! 10)
+	)
+).front;
+
+
+</code></pre>
+
+<h1 id="group-the-controlspec-arguments-to-make-them-more-compact">Group the controlSpec arguments to make them more compact</h1>
+
+<p>Also initialize the values of gui elements</p>
 
 
 <footer class=" footline" >
 	
 </footer>
-
-
-
-	
-
-	<div class="extra-pagination inner">
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">Registry: Hierarchical Namespaces</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-	   <article class="post basic_classes">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">Notification</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/">&raquo;</a></p>
-    </section>
-    <footer class=" footline" >
-         
-        
-
-        
-        
-
-    </footer>
-</article>
-
-
-
-
-	
-
-	<div style="margin-bottom:2rem"></div>
-
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 on 1</span>
-	
-</nav>
-
 
 
 
@@ -888,16 +993,6 @@ active
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -910,17 +1005,8 @@ active
             
                 
                     
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
+                        
+                        
                     
                 
                 
@@ -933,84 +1019,21 @@ active
             
                 
                     
+                    
                 
                 
                 
             
         
+                    
+                
+                    
+            
+            
+                
                     
                         
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1057,6 +1080,28 @@ active
             
                 
                     
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
                     
                 
                 
@@ -1069,8 +1114,72 @@ active
             
                 
                     
+                
+                
+                
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1120,10 +1229,10 @@ active
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/" title="Buffers"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/gui/016-creating-guis/" title="Creating GUIs"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/" title="Registry: Hierarchical Namespaces" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/buffers_and_grains/" title="Playing buffers and grains" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1150,3 +1259,4 @@ active
 
   </body>
 </html>
+
