@@ -1,0 +1,12 @@
++++
+title = "Creating GUIs"
+weight = 16
++++
+
+This library provides utilities for creating GUI elements and connecting them to both patterns and synths.  Here are some examples.
+
+* Windows
+
+* Sliders
+
+* Buttons

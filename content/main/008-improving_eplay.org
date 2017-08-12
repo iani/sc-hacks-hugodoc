@@ -1,0 +1,69 @@
++++
+title = "Improving Function:eplay"
+weight = 8
++++
+
+Individual improvement steps for Function:eplay: Done and TODO.  Thesse notes are from an early stage in development.  Now the functionality of most done steps has been integrated in class =SynthPlayer=.  
+
+#+HTML: <!-- more -->
+
+* Done (11 Jun 2017 21:48)
+- Store the resulting synth in envir under =[\synths, synthName]= (default for =synthName=: =synth=).
+- If previous synth exists under =[\synths, synthName]= path, then free/release it.
+- When a synth ends, remove it from its path in envir.
+- Make sure that when a synth =previousSynth= is released by replacing it through a new synth created through =Function:eplay=, the =previousSynth= ending does not remove the new synth that has already been stored in the same path.
+- Notification actions for updates from enviroment variable changes are added when the Synth starts (not when the =Function:play= message is sent). This way, there are no more errors "Node not found" when changing the environment before the synth has started.
+
+* Done (19 Jun 2017 10:52): 
+** Synth start-stop (release) and set control from Event:eplay (EventPatterns)
+
+The following will add some complexity to the current scheme and may therefore be added later on only.
+
+- Define =SynthPlayer= to add synth start-stop capabilities to =Function:eplay=
+- Add synths instance variable to Nevent for faster access to SynthPlayers
+
+In addition to listening for changes from the =currentEnvironment=, a second notification mechanism should be added to Function:eplay, to enable creating new synths, releasing or freeing this synth when playing EventPatterns with an =EventStreamPlayer=.  A simple way to do this is by a stream which generates the commands to be played.  The stream is stored in a key with the same name as the synth to be controlled.  Function:eplay or SynthPlayer:play adds the environment as notifier to the synth with the synth's name as message and a switch statement which choses the action to be performed depending on the value that was sent in addition to the key (message) by the changed message. A draft for this code has been added now to Function:eplay: 
+
+#+BEGIN_SRC javascript
+  synth.onStart (this, {| myself |
+	  // "Synth started, so I add notifiers for updates".postln;
+	  argNames do: { | param |
+		  synth.addNotifier (envir, param, { | val |
+			  synth.set (param, val);
+		  });
+		  // Experimental: 
+		  synth.addNotifier (envir, name, { | command |
+			  //	command.postln;
+			  switch (command,
+				  \stop, {
+					  synth.objectClosed;
+					  synth.release (envir [\releaseTime] ? 0.02);
+				  },
+				  { postf ("the command was: %\n", command)}
+			  )
+		  })
+	  };
+  });
+#+END_SRC
+* Still TODO (19 Jun 2017 10:52)
+** Synth start-stop notifications for GUI and other listeners
+- When a new synth starts or when an old synth is removed, it should emit notifications so that GUIS that depend on it update their status.  Such guis may be:
+  - Start-stop buttons
+  - Guis with widgets for controlling the synths parameters.  When a new synth starts, then the old gui should be replaced with a new one with widgets corresponding to the new synth's control parameters.
+  Note: Possibly the notification should be emitted from the =\synthName= under which the synth is stored.  The messages may be:
+  - =\started=
+  - =\stopped=
+  - =\replaced=
+    The above is subject to testing. 
+
+#+HTML: <!-- more -->
+
+* Notes
+- When this is done, it should be possible to create multiple gui windows for multiple synths running in the same environment. However, parameters under the same name will control the parameters under that name for all synths in that environment.
+- To develop the right code for this, do it with a plain function, adding the functionalities one-by-one.
+
+* Current =Function:eplay= method code
+
+* Drafts
+
+See [[https://github.com/iani/sc-hacks/blob/master/LabCode/rebuildFunctionEplay.scd]] for draft used to build this functionality in =SynthPlayer=

@@ -1,0 +1,14 @@
++++
+title = "Roadmap"
+weight = 4
++++
+
+* Work in progress - August 2017
+
+- Dispatch class for use in Nevent
+- Rework of Group allocation scheme
+- New class: Player for playing Synths and Patterns in the same instance.
+
+* Future plans: Audio Feedback between synths
+
+A particularly interesting case is when an Ndef reads and processes its own output.  An implementation of this feature, using [[http://doc.sccode.org/Classes/InFeedback.html][InFeedback]] is planned for the future.
