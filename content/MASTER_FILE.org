@@ -32,7 +32,7 @@ The purpose of the /sc-hacks/ library is to make experimentation and music makin
 
 ** History
 :PROPERTIES:
-:filename-not: history
+:filename: history
 :END:
 
 /sc-hacks/ was motivated by the need to improve some aspects [[http://doc.sccode.org/Overviews/JITLib.html][JITLib]], such as:
@@ -42,6 +42,17 @@ The purpose of the /sc-hacks/ library is to make experimentation and music makin
 Fascinated by the => operator of [[http://chuck.cs.princeton.edu/doc/language/][ChucK]], and by the idea of [[http://doc.sccode.org/Reference/Adverbs.html][adverbs for binary operators]] in SuperCollider, I wanted to explore binary operators as a way to write commonly used expressions in a shorter way.  
 
 The first results of these attempts are the libraries [[tiny-sc]] and [[tiny-inc]].  These have many shortcomings, which the present library is trying to fix.  At present, /sc-hacks/ is being redesigned once more, in order to implement two of the most attractive features of JITLib: sequential playing synth-functions and patterns in one =Ndef= and linking the output of an Ndef to the input of another Ndef.
+
+** Roadmap
+:PROPERTIES:
+:filename: roadmap
+:END:
+
+*** Work in progress - August 2017
+
+- Dispatch class for use in Nevent
+- Rework of Group allocation scheme
+- New class: Player for playing Synths and Patterns in the same instance.
 
 *** Future plans: Audio Feedback between synths
 

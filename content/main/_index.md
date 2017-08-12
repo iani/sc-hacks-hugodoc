@@ -1,4 +1,4 @@
 +++
 title = "Operators and Language Design"
-weight = 7
+weight = 9
 +++
