@@ -245,6 +245,20 @@
 	"content": ""
 },
 {
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/making-this-site/036-hugo/",
+	"title": "Hugo",
+	"tags": [],
+	"description": "",
+	"content": "This site was made with hugo and exported using this script:\n#!/bin/sh DIR=$(dirname \u0026quot;$0\u0026quot;) cd $DIR/.. if [[ $(git status -s) ]] then echo \u0026quot;The working directory is dirty. Please commit any pending changes.\u0026quot; exit 1; fi echo \u0026quot;Deleting old publication\u0026quot; rm -rf public mkdir public git worktree prune rm -rf .git/worktrees/public/ echo \u0026quot;Checking out gh-pages branch into public\u0026quot; git worktree add -B gh-pages public origin/gh-pages echo \u0026quot;Removing existing files\u0026quot; rm -rf public/* echo \u0026quot;Generating site\u0026quot; hugo echo \u0026quot;Updating gh-pages branch\u0026quot; cd public \u0026amp;\u0026amp; git add --all \u0026amp;\u0026amp; git commit -m \u0026quot;Publishing to gh-pages (publish.sh)\u0026quot; git push -v origin gh-pages\\:refs/heads/gh-pages  The script was placed in the _scripts directory under the root of the site.\nYou can clone the source for this site from: https://github.com/iani/sc-hacks-hugodoc\n"
+},
+{
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/making-this-site/",
+	"title": "Making this site",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
 	"uri": "https://iani.github.io/sc-hacks-hugodoc/_header/",
 	"title": "header",
 	"tags": [],

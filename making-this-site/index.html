@@ -7,7 +7,7 @@
     <meta name="description" content="Documentation for a SuperCollider Library">
 <meta name="author" content="Ioannis Zannos">
 
-    <title>About Server Objects :: sc-hacks documentation</title>
+    <title>Making this site :: sc-hacks documentation</title>
     <link rel="shortcut icon" href="https://iani.github.io/sc-hacks-hugodoc/images/favicon.png" type="image/x-icon" />
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/nucleus.css" rel="stylesheet">
     <link href="https://iani.github.io/sc-hacks-hugodoc/css/font-awesome.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
     
 
   </head>
-  <body class="" data-url="/server_objects/025-about-server-objects/">
+  <body class="" data-url="/making-this-site/">
     <nav id="sidebar" class="">
   <div id="header-wrapper">
     <div id="header">
@@ -410,7 +410,7 @@
 
 
 <li data-nav-id="/server_objects/" class="dd-item 
-parent
+
 
 
 ">
@@ -418,7 +418,7 @@ parent
     <span>Server objects</span>
 
     
-    <i class="fa fa-angle-down fa-lg category-icon"></i>
+    <i class="fa fa-angle-right fa-lg category-icon"></i>
     
     
     
@@ -427,7 +427,7 @@ parent
         
          
           <li data-nav-id="/server_objects/025-about-server-objects/" class="dd-item
-         active
+         
           ">
             <a href="https://iani.github.io/sc-hacks-hugodoc/server_objects/025-about-server-objects/">
             <span>About Server Objects</span> 
@@ -573,15 +573,15 @@ parent
 
 
 <li data-nav-id="/making-this-site/" class="dd-item 
-
-
+parent
+active
 
 ">
   <a href="https://iani.github.io/sc-hacks-hugodoc/making-this-site/">
     <span>Making this site</span>
 
     
-    <i class="fa fa-angle-right fa-lg category-icon"></i>
+    <i class="fa fa-angle-down fa-lg category-icon"></i>
     
     
     
@@ -641,12 +641,7 @@ parent
 
 
 
-
-
-
- <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > <a href='https://iani.github.io/sc-hacks-hugodoc/server_objects/'>Server objects</a> > About Server Objects
-
- 
+ <a href='https://iani.github.io/sc-hacks-hugodoc/'>Main</a> > Making this site
 
  
 
@@ -664,28 +659,63 @@ parent
         
         <div id="body-inner">
           
-            <h1>About Server Objects</h1>
+            <h1>Making this site</h1>
           
 
 
 
 
-<h1 id="server-objects-managed-by-nevent">Server objects managed by Nevent</h1>
-
-<p>These are:</p>
-
-<ul>
-<li>The Group which is used to create all Synths in the event.</li>
-<li>Busses connecting inputs or outputs of Synths in the event to those of other events.</li>
-<li>Buffers used for playing by Synths</li>
-</ul>
-
-<h1 id="allocating-server-objects-at-reboot">Allocating Server Objects at Reboot</h1>
 
 
 <footer class=" footline" >
 	
 </footer>
+
+
+
+	
+
+	<div class="extra-pagination inner">
+	<nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 on 1</span>
+	
+</nav>
+
+	</div>
+
+	
+	   <article class="post making-this-site">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://iani.github.io/sc-hacks-hugodoc/making-this-site/036-hugo/">Hugo</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>This site was made with hugo and exported using this script:
+#!/bin/sh DIR=$(dirname &quot;$0&quot;) cd $DIR/.. if [[ $(git status -s) ]] then echo &quot;The working directory is dirty. Please commit any pending changes.&quot; exit 1; fi echo &quot;Deleting old publication&quot; rm -rf public mkdir public git worktree prune rm -rf .git/worktrees/public/ echo &quot;Checking out gh-pages branch into public&quot; git worktree add -B gh-pages public origin/gh-pages echo &quot;Removing existing files&quot; rm -rf public/* echo &quot;Generating site&quot; hugo echo &quot;Updating gh-pages branch&quot; cd public &amp;&amp; git add --all &amp;&amp; git commit -m &quot;Publishing to gh-pages (publish. <a class="read-more" href="https://iani.github.io/sc-hacks-hugodoc/making-this-site/036-hugo/">&raquo;</a></p>
+    </section>
+    <footer class=" footline" >
+         
+        
+
+        
+        
+
+    </footer>
+</article>
+
+
+
+
+	
+
+	<div style="margin-bottom:2rem"></div>
+
+	<nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 on 1</span>
+	
+</nav>
+
 
 
 
@@ -976,33 +1006,6 @@ parent
             
                 
                     
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-                
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
                 
                 
                 
@@ -1032,18 +1035,6 @@ parent
         
                     
                         
-            
-            
-                
-                    
-                
-                
-                
-            
-        
-                    
-                
-                    
             
             
                 
@@ -1099,6 +1090,17 @@ parent
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+                
+            
+        
+                    
                 
                     
             
@@ -1115,6 +1117,33 @@ parent
             
             
                 
+                    
+                
+                
+                
+            
+        
+                    
+                
+                    
+            
+            
+                
+                    
+                    
+                
+                
+                
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -1130,10 +1159,10 @@ parent
 
 
         
-            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/" title="Server objects"> <i class="fa fa-chevron-left"></i></a>
+            <a class="nav nav-prev" href="https://iani.github.io/sc-hacks-hugodoc/use_examples/034-pattern-synth-play/" title="Pattern and Synth play scenarios"> <i class="fa fa-chevron-left"></i></a>
         
         
-            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/server_objects/026-server-and-nevent/" title="Server and Nevent" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+            <a class="nav nav-next" href="https://iani.github.io/sc-hacks-hugodoc/making-this-site/036-hugo/" title="Hugo" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
         
     </div>
 
@@ -1160,4 +1189,3 @@ parent
 
   </body>
 </html>
-
