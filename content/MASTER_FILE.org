@@ -1420,8 +1420,6 @@ The =addNotifierOneShot= method executes the registered Function just once. This
 #+END_SRC
 
 Similar extensions can be built for whatever object needs to monitor the closing or end of an object such as closing of a Window or stopping of a Pattern.
-
-
 * Use examples
   :PROPERTIES:
   :foldername: use_examples
@@ -1440,4 +1438,56 @@ Similar extensions can be built for whatever object needs to monitor the closing
 *** Playing several patterns in the same environment
 
 *** Playing several synths in the same environment
+
+
+* Making this site
+:PROPERTIES:
+:foldername: making-this-site
+:END:
+
+** Hugo
+:PROPERTIES:
+:filename: hugo
+:END:
+
+This site was made with [[https://gohugo.io/][hugo]] and exported using this script: 
+
+#+BEGIN_SRC sh
+#!/bin/sh
+
+DIR=$(dirname "$0")
+
+cd $DIR/..
+
+if [[ $(git status -s) ]]
+then
+    echo "The working directory is dirty. Please commit any pending changes."
+    exit 1;
+fi
+
+echo "Deleting old publication"
+rm -rf public
+mkdir public
+git worktree prune
+rm -rf .git/worktrees/public/
+
+echo "Checking out gh-pages branch into public"
+git worktree add -B gh-pages public origin/gh-pages
+
+echo "Removing existing files"
+rm -rf public/*
+
+echo "Generating site"
+hugo
+
+echo "Updating gh-pages branch"
+cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
+
+git push -v origin gh-pages\:refs/heads/gh-pages
+
+#+END_SRC
+
+The script was placed in the _scripts directory under the root of the site.
+
+You can clone the source for this site from: https://github.com/iani/sc-hacks-hugodoc
 
