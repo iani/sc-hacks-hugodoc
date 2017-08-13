@@ -17,4 +17,4 @@ The purpose of the /sc-hacks/ library is to make experimentation and music makin
 
 * Caveat
 
-/sc-hacks/ is in *permanent alpha*.  As it says in http://semver.org/, /"If you’re changing the API every day you should either still be in version 0.y.z or on a separate development branch working on the next major version."/.  This library will remain 0.n alpha for a long time, as changes in operator names and syntax are happening constantly.
+/sc-hacks/ is in *permanent alpha*.  According to [[http://semver.org/][semantic versioning]], /"If you’re changing the API every day you should either still be in version 0.y.z or on a separate development branch working on the next major version."/.  This library will remain 0.n alpha for a long time, as changes in operator names and syntax are happening constantly.
