@@ -1487,7 +1487,7 @@ git push -v origin gh-pages\:refs/heads/gh-pages
 
 #+END_SRC
 
-The script was placed in the _scripts directory under the root of the site.
+The script was placed in the _scripts directory under the root directory of the site.
 
-You can clone the source for this site from: https://github.com/iani/sc-hacks-hugodoc
+You can clone the source for this site from: [[https://github.com/iani/sc-hacks-hugodoc]].
 
