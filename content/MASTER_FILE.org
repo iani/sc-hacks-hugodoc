@@ -11,7 +11,7 @@ draft = true
 
 ** Anti-Mythology
 :PROPERTIES:
-:filename: anti-mythology
+:FILENAME: anti-mythology
 :END:
 
 *As of August 2017, sc-hacks is being re-done from scratch.
@@ -1240,26 +1240,6 @@ Here are some examples for playing grains of sound from a buffer with
 
 To be provided ...
 
-* Playing with data
-  :PROPERTIES:
-  :foldername: data
-  :END:
-** Playing With Data
-:PROPERTIES:
-:filename: playing-with-data
-:END:
-
-This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer. 
-
-*** Data dimensions and play method
-
-The data is a 2 dimensional array.  It is played as a =Pseq= along the first dimension.  This results in a stream of rows.  Each subsequent element returned by the stream is a row of data.
-
-*** Different ways of playing rows
-**** Playing each data row as one Synth
-
-**** Playing each d
-
 * Server objects
   :PROPERTIES:
   :foldername: server_objects
@@ -1420,6 +1400,8 @@ The =addNotifierOneShot= method executes the registered Function just once. This
 #+END_SRC
 
 Similar extensions can be built for whatever object needs to monitor the closing or end of an object such as closing of a Window or stopping of a Pattern.
+
+
 * Use examples
   :PROPERTIES:
   :foldername: use_examples
@@ -1438,6 +1420,26 @@ Similar extensions can be built for whatever object needs to monitor the closing
 *** Playing several patterns in the same environment
 
 *** Playing several synths in the same environment
+
+* Playing with data
+  :PROPERTIES:
+  :foldername: data
+  :END:
+** Playing With Data
+:PROPERTIES:
+:filename: playing-with-data
+:END:
+
+This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer. 
+
+*** Data dimensions and play method
+
+The data is a 2 dimensional array.  It is played as a =Pseq= along the first dimension.  This results in a stream of rows.  Each subsequent element returned by the stream is a row of data.
+
+*** Different ways of playing rows
+**** Playing each data row as one Synth
+
+**** Playing each d
 
 
 * Making this site

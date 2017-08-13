@@ -1,6 +1,0 @@
-+++
-title = "Target Group"
-weight = 27
-+++
-
-* Maintaining Target Group Order

@@ -1,4 +1,4 @@
 +++
 title = "Basic Classes"
-weight = 32
+weight = 30
 +++
