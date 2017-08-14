@@ -173,32 +173,21 @@ To be provided ...</description>
     </item>
     
     <item>
-      <title>Playing With Data</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/data/023-playing-with-data/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://iani.github.io/sc-hacks-hugodoc/data/023-playing-with-data/</guid>
-      <description>This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer.
-Data dimensions and play method The data is a 2 dimensional array. It is played as a Pseq along the first dimension. This results in a stream of rows. Each subsequent element returned by the stream is a row of data.
-Different ways of playing rows Playing each data row as one Synth Playing each d </description>
-    </item>
-    
-    <item>
       <title>About Server Objects</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/025-about-server-objects/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/023-about-server-objects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/025-about-server-objects/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/023-about-server-objects/</guid>
       <description>Server objects managed by Nevent These are:
  The Group which is used to create all Synths in the event. Busses connecting inputs or outputs of Synths in the event to those of other events. Buffers used for playing by Synths  Allocating Server Objects at Reboot </description>
     </item>
     
     <item>
       <title>Server and Nevent</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/026-server-and-nevent/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/024-server-and-nevent/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/026-server-and-nevent/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/024-server-and-nevent/</guid>
       <description>Each Nevent Environment has only one Server instance. Synths and Patterns play in that instance.
 Open issue: Where to store the server of an Environment. Possibilities:
  As variable ~server In Library using Registry, using [environment \server] as key In prototype event for Nevent. (Needs to be programmed yet). Do not store, use Server.default  Currently option 4 is used, to concentrate on finishing the other features of the library. Adding multiple servers will probably require a NeventGroup class whose instances create and manage groups of Nevents playing on the same server.</description>
@@ -206,57 +195,68 @@ Open issue: Where to store the server of an Environment. Possibilities:
     
     <item>
       <title>Target Group</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/027-target-group/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/025-target-group/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/027-target-group/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/025-target-group/</guid>
       <description>Maintaining Target Group Order </description>
     </item>
     
     <item>
       <title>Busses</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/028-busses/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/026-busses/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/028-busses/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/026-busses/</guid>
       <description>Bus Allocation Bus Index Parameter Updates </description>
     </item>
     
     <item>
       <title>Buffers</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/server_objects/027-buffers/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/server_objects/027-buffers/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Registry: Hierarchical Namespaces</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/basic_classes/029-registry/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/basic_classes/029-registry/</guid>
       <description>This class uses the Library class to store and retrieve objects using any array of objects as key. This extends the way that Pdef, Ndef, OSCdef work, making it possible for any class to store its instances in an arbitrary hierarchical path, without subclassing. To create this behavior one can then add a method to Symbol for accessing the kind of object needed. For example: \aSymbol.oscFunc accesses OSCFunc instances. This also allows easier customization of how the object is created if not found.</description>
     </item>
     
     <item>
       <title>Notification</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/basic_classes/030-notification/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/basic_classes/030-notification/</guid>
       <description>Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol.</description>
     </item>
     
     <item>
       <title>Pattern and Synth play scenarios</title>
-      <link>https://iani.github.io/sc-hacks-hugodoc/use_examples/034-pattern-synth-play/</link>
+      <link>https://iani.github.io/sc-hacks-hugodoc/use_examples/032-pattern-synth-play/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://iani.github.io/sc-hacks-hugodoc/use_examples/034-pattern-synth-play/</guid>
+      <guid>https://iani.github.io/sc-hacks-hugodoc/use_examples/032-pattern-synth-play/</guid>
       <description>Event:eplay and SynthPlayer can play with several instances in parallel on the same environment, and also provide several additional features. This section gives some examples that explore these features and show how they work and notes some questions regarding future features.
 Creating, starting and stopping patterns Playing several patterns in the same environment Playing several synths in the same environment </description>
+    </item>
+    
+    <item>
+      <title>Playing With Data</title>
+      <link>https://iani.github.io/sc-hacks-hugodoc/data/034-playing-with-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://iani.github.io/sc-hacks-hugodoc/data/034-playing-with-data/</guid>
+      <description>This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer.
+Data dimensions and play method The data is a 2 dimensional array. It is played as a Pseq along the first dimension. This results in a stream of rows. Each subsequent element returned by the stream is a row of data.
+Different ways of playing rows Playing each data row as one Synth Playing each d </description>
     </item>
     
     <item>

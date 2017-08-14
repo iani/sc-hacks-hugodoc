@@ -4,7 +4,7 @@
 	"title": "Main",
 	"tags": [],
 	"description": "",
-	"content": "Documentation of sc-hacks library for SuperCollider\nhttps://github.com/iani/sc-hacks\nAs of August 2017, sc-hacks is being re-done from scratch. Both the library and its API will change in the near future.\n"
+	"content": "Documentation of sc-hacks library for SuperCollider\nhttps://github.com/iani/sc-hacks\nTHIS SITE IS OBSOLETE\nPlease refer to the new version here.\nAs of August 2017, sc-hacks is being re-done from scratch. Both the library and its API will change in the near future.\n"
 },
 {
 	"uri": "https://iani.github.io/sc-hacks-hugodoc/introduction/002-anti-mythology/",
@@ -154,49 +154,35 @@
 	"content": ""
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/data/023-playing-with-data/",
-	"title": "Playing With Data",
-	"tags": [],
-	"description": "",
-	"content": "This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer.\nData dimensions and play method The data is a 2 dimensional array. It is played as a Pseq along the first dimension. This results in a stream of rows. Each subsequent element returned by the stream is a row of data.\nDifferent ways of playing rows Playing each data row as one Synth Playing each d "
-},
-{
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/data/",
-	"title": "Playing with data",
-	"tags": [],
-	"description": "",
-	"content": ""
-},
-{
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/025-about-server-objects/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/023-about-server-objects/",
 	"title": "About Server Objects",
 	"tags": [],
 	"description": "",
 	"content": "Server objects managed by Nevent These are:\n The Group which is used to create all Synths in the event. Busses connecting inputs or outputs of Synths in the event to those of other events. Buffers used for playing by Synths  Allocating Server Objects at Reboot "
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/026-server-and-nevent/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/024-server-and-nevent/",
 	"title": "Server and Nevent",
 	"tags": [],
 	"description": "",
 	"content": "Each Nevent Environment has only one Server instance. Synths and Patterns play in that instance.\nOpen issue: Where to store the server of an Environment. Possibilities:\n As variable ~server In Library using Registry, using [environment \\server] as key In prototype event for Nevent. (Needs to be programmed yet). Do not store, use Server.default  Currently option 4 is used, to concentrate on finishing the other features of the library. Adding multiple servers will probably require a NeventGroup class whose instances create and manage groups of Nevents playing on the same server. NeventGroup will store the selected Server instance in the parent event of each Nevent instance which it creates.\n"
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/027-target-group/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/025-target-group/",
 	"title": "Target Group",
 	"tags": [],
 	"description": "",
 	"content": "Maintaining Target Group Order "
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/028-busses/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/026-busses/",
 	"title": "Busses",
 	"tags": [],
 	"description": "",
 	"content": "Bus Allocation Bus Index Parameter Updates "
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/server_objects/027-buffers/",
 	"title": "Buffers",
 	"tags": [],
 	"description": "",
@@ -210,7 +196,7 @@
 	"content": ""
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/basic_classes/029-registry/",
 	"title": "Registry: Hierarchical Namespaces",
 	"tags": [],
 	"description": "",
@@ -224,14 +210,14 @@
 	"content": ""
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/basic_classes/030-notification/",
 	"title": "Notification",
 	"tags": [],
 	"description": "",
 	"content": "Notification: Register a function callback to a message and a pair of objects =Notification= is an improved version of the NotificationCenter class. This class enables objects to register a function which is called when another object changes according to some aspect. The aspect is expressed by a symbol. To trigger a notification action, one sends the message changed to an object together with a symbol expressing the aspect which changed. The function will only be evaluated for those objects which have registered to listen to the changing object according to the given aspect symbol. This allows detailed control of callback execution amongst objects of the system. For example, one can tell a gui object to change its color to green when a synth starts, and to change its color to red when that synth stops.\n =Notification= adds the following enhancements: Ability to remove existing notification connections reliably. Several methods for easily adding or modifying connections between objects. Ability to remove all connections from an object with a single message, objectClosed, and also to execute additional actions when that object closes. Closing here means that the object is freed and will no longer be used by the system.  Examples onObjectClosed Registry uses onObjectClosed to remove objects by sending them that message:\n*new { | ... pathAndFunc | var path, makeFunc, instance; makeFunc = pathAndFunc.last; path = pathAndFunc[0..pathAndFunc.size-2]; instance = Library.global.atPath(path); if (instance.isNil) { instance = makeFunc.value; Library.global.putAtPath(path, instance); instance.onObjectClosed(this, { this.remove(*path) }); }; ^instance; }  addNotifierOneShot This is in turn used by oscFunc and rout methods for removing OSCFunc and Routine objects in order to replace them with new instances.\nThe addNotifierOneShot method executes the registered Function just once. This is useful when it is clear that only one call is required. For example, the onEnd and onStart methods for Node make use of the addNotifierOneShot method:\n+ Node { onStart { | listener, action | NodeWatcher.register(this); listener.addNotifierOneShot(this, \\n_go, action); } onEnd { | listener, action | NodeWatcher.register(this); //\tthis.isPlaying = true; // dangerous listener.addNotifierOneShot(this, \\n_end, action); } }  Similar extensions can be built for whatever object needs to monitor the closing or end of an object such as closing of a Window or stopping of a Pattern.\n"
 },
 {
-	"uri": "https://iani.github.io/sc-hacks-hugodoc/use_examples/034-pattern-synth-play/",
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/use_examples/032-pattern-synth-play/",
 	"title": "Pattern and Synth play scenarios",
 	"tags": [],
 	"description": "",
@@ -240,6 +226,20 @@
 {
 	"uri": "https://iani.github.io/sc-hacks-hugodoc/use_examples/",
 	"title": "Use examples",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/data/034-playing-with-data/",
+	"title": "Playing With Data",
+	"tags": [],
+	"description": "",
+	"content": "This section discusses problems and approaches for sonifying data using EventPlayer and SynthPlayer.\nData dimensions and play method The data is a 2 dimensional array. It is played as a Pseq along the first dimension. This results in a stream of rows. Each subsequent element returned by the stream is a row of data.\nDifferent ways of playing rows Playing each data row as one Synth Playing each d "
+},
+{
+	"uri": "https://iani.github.io/sc-hacks-hugodoc/data/",
+	"title": "Playing with data",
 	"tags": [],
 	"description": "",
 	"content": ""

@@ -92,31 +92,23 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/data/023-playing-with-data/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/023-about-server-objects/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/data/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/024-server-and-nevent/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/025-about-server-objects/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/025-target-group/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/026-server-and-nevent/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/026-busses/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/027-target-group/</loc>
-  </url>
-  
-  <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/028-busses/</loc>
-  </url>
-  
-  <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/029-buffers/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/server_objects/027-buffers/</loc>
   </url>
   
   <url>
@@ -124,7 +116,7 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/031-registry/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/029-registry/</loc>
   </url>
   
   <url>
@@ -132,15 +124,23 @@
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/032-notification/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/basic_classes/030-notification/</loc>
   </url>
   
   <url>
-    <loc>https://iani.github.io/sc-hacks-hugodoc/use_examples/034-pattern-synth-play/</loc>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/use_examples/032-pattern-synth-play/</loc>
   </url>
   
   <url>
     <loc>https://iani.github.io/sc-hacks-hugodoc/use_examples/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/data/034-playing-with-data/</loc>
+  </url>
+  
+  <url>
+    <loc>https://iani.github.io/sc-hacks-hugodoc/data/</loc>
   </url>
   
   <url>
